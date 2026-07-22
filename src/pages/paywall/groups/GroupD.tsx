@@ -26,7 +26,7 @@ export const GroupD: FC = () => {
 
   return (
     <>
-      <HeaderFlowSection activeStep={0} />
+      <HeaderFlowSection />
       <Content>
         <Title>Choose a price for your 7-day trial</Title>
 

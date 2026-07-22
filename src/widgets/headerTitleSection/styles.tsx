@@ -17,27 +17,9 @@ export const Header = styled.section`
   }
 `;
 
-export const LogoSlot = styled.div`
-  flex: 1;
-  display: flex;
-  align-items: center;
-
-  &:last-child {
-    justify-content: flex-end;
-  }
-
-  @media (max-width: 760px) {
-    flex: none;
-    justify-content: center;
-
-    &:last-child {
-      display: none;
-    }
-  }
-`;
-
 export const Logo = styled.img`
   height: 36px;
+  flex-shrink: 0;
 
   @media (max-width: 760px) {
     height: 28px;
@@ -45,6 +27,7 @@ export const Logo = styled.img`
 `;
 
 export const HeaderTitle = styled.h1`
+  flex: 1;
   color: var(--Text-text_default, #393939);
   text-align: center;
   font-family: Montserrat;
@@ -55,9 +38,24 @@ export const HeaderTitle = styled.h1`
   margin: 0;
   white-space: nowrap;
 
+  @media (max-width: 1240px) {
+    font-size: 22px;
+    line-height: 28px;
+  }
+
   @media (max-width: 760px) {
     font-size: 16px;
     line-height: 22px;
     white-space: normal;
+  }
+`;
+
+export const StepsSlot = styled.div`
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+
+  @media (max-width: 1024px) {
+    display: none;
   }
 `;

@@ -40,7 +40,7 @@ export const GroupA: FC = () => {
 
   return (
     <>
-      <HeaderFlowSection activeStep={1} hideFirstStep />
+      <HeaderFlowSection />
       <Content>
         <CheckoutColumns>
           <PaymentColumn>

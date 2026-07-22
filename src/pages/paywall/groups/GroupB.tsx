@@ -43,7 +43,7 @@ export const GroupB: FC = () => {
 
   return (
     <>
-      <HeaderFlowSection activeStep={1} hideFirstStep />
+      <HeaderFlowSection />
       <Content>
         <Title>Your download is almost complete</Title>
         <Subtitle>It starts the moment your payment goes through.</Subtitle>
