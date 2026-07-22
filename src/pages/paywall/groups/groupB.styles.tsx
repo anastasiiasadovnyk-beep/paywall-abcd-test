@@ -58,7 +58,8 @@ export const DownloadPanel = styled.div`
   width: 100%;
   padding: 36px 44px;
   border-radius: var(--radius-3);
-  background: var(--color-primary-filled-50, #e5f2ff);
+  background: var(--Background-bg_white, #fff);
+  box-shadow: 0 8px 32px 0 rgba(17, 24, 40, 0.08);
 
   @media (max-width: 760px) {
     padding: 20px 16px;
@@ -157,7 +158,8 @@ export const ProgressTrack = styled.div`
   width: 100%;
   height: 12px;
   border-radius: var(--radius-8);
-  background: var(--Background-bg_white, #fff);
+  /* Light-grey track so it stays visible on the white panel. */
+  background: var(--color-bg-light-grey, #f5f5f7);
   overflow: hidden;
 `;
 
