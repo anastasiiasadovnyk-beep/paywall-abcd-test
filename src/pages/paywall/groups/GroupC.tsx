@@ -11,7 +11,6 @@ import featureConvert from '@/shared/ui/assets/features/feature-convert.svg';
 import featureEdit from '@/shared/ui/assets/features/feature-edit.svg';
 import featureMedia from '@/shared/ui/assets/features/feature-media.svg';
 import featureOrganize from '@/shared/ui/assets/features/feature-organize.svg';
-import { DocumentPage } from '@/shared/ui/documentPage';
 import {
   CalendarMonthIcon,
   CheckCircleIcon,
@@ -36,10 +35,10 @@ import {
   FileCardTitleRow,
   FileName,
   DocumentCheckBadge,
-  DocumentViewport,
   LeftColumn,
   PageTitle,
   PdfChip,
+  PlaceholderPage,
   PreviewPanel,
   PreviewTitleRow,
   ProgressFill,
@@ -105,9 +104,7 @@ export const GroupC: FC = () => {
                 Your document is ready!
               </PreviewTitleRow>
               <PdfChip>PDF</PdfChip>
-              <DocumentViewport>
-                <DocumentPage />
-              </DocumentViewport>
+              <PlaceholderPage />
             </PreviewPanel>
 
             <TimelineList>

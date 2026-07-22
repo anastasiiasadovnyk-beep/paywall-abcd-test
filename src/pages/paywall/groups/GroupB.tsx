@@ -2,6 +2,7 @@ import type { FC } from 'react';
 
 import { CHECKOUT, CHECKOUT_FILE } from '@/shared/constants/checkout';
 import { formatPlanPrice } from '@/shared/lib/price';
+import { Divider } from '@/shared/ui/divider';
 import { DocumentMock } from '@/shared/ui/documentMock';
 import { HeaderFlowSection } from '@/widgets/headerFlowSection';
 
@@ -29,7 +30,6 @@ import {
   TotalDueRow,
   TotalDueTitle,
   TrialCaption,
-  TrustDivider,
   TrustItem,
   TrustRow,
 } from './groupB.styles';
@@ -67,9 +67,9 @@ export const GroupB: FC = () => {
           </ProgressBarRow>
           <TrustRow>
             <TrustpilotRating score={4.8} />
-            <TrustDivider />
+            <Divider $orientation="vertical" $length="18px" />
             <TrustItem>10+ million users</TrustItem>
-            <TrustDivider />
+            <Divider $orientation="vertical" $length="18px" />
             <TrustItem>Cancel anytime</TrustItem>
           </TrustRow>
         </DownloadPanel>
@@ -82,7 +82,11 @@ export const GroupB: FC = () => {
         <PaymentMethods layout="grid" cardStyle="dark" />
 
         <TrialCaption>
-          7-day trial for {trialPrice} · then {recurringPrice} every 4 weeks · cancel anytime
+          <span>7-day trial for {trialPrice}</span>
+          <Divider $orientation="vertical" $length="14px" />
+          <span>then {recurringPrice} every 4 weeks</span>
+          <Divider $orientation="vertical" $length="14px" />
+          <span>cancel anytime</span>
         </TrialCaption>
 
         <DisclaimerContainer>

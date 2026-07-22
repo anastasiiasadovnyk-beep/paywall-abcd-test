@@ -2,6 +2,7 @@ import type { FC } from 'react';
 
 import { CHECKOUT, CHECKOUT_FILE, TRIAL_INCLUDES } from '@/shared/constants/checkout';
 import { formatPlanPrice } from '@/shared/lib/price';
+import { Divider } from '@/shared/ui/divider';
 import { DocumentMock } from '@/shared/ui/documentMock';
 import { CheckIcon } from '@/shared/ui/icons';
 import { PriceWithSup } from '@/shared/ui/priceWithSup';
@@ -21,7 +22,6 @@ import {
   FileReadyThumbnail,
   FileReadyTitle,
   IncludesCard,
-  IncludesDivider,
   IncludesItem,
   IncludesList,
   IncludesTitle,
@@ -82,7 +82,7 @@ export const GroupA: FC = () => {
                   </IncludesItem>
                 ))}
               </IncludesList>
-              <IncludesDivider />
+              <Divider />
               <IncludesTotalRow>
                 <span>Total due today:</span>
                 <b data-testid="includes-total-price">{trialPrice}</b>

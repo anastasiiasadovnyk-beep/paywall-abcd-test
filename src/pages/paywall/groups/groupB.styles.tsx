@@ -205,12 +205,6 @@ export const TrustItem = styled.div`
   gap: 10px;
 `;
 
-export const TrustDivider = styled.div`
-  width: 1px;
-  height: 18px;
-  background: var(--color-divider);
-`;
-
 export const TotalDueRow = styled.div`
   display: flex;
   align-items: center;
@@ -246,6 +240,11 @@ export const TotalDuePrice = styled.div`
 `;
 
 export const TrialCaption = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
   color: var(--Text-text_secondary, #757575);
   text-align: center;
   font-family: Montserrat;

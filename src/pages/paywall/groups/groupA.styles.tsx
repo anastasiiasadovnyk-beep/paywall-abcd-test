@@ -229,12 +229,6 @@ export const IncludesItem = styled.div<{ $bold?: boolean }>`
   }
 `;
 
-export const IncludesDivider = styled.div`
-  width: 100%;
-  height: 1px;
-  background: var(--color-divider);
-`;
-
 export const IncludesTotalRow = styled.div`
   display: flex;
   align-items: center;

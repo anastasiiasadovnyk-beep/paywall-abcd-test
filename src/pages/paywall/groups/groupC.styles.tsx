@@ -150,13 +150,17 @@ export const PreviewPanel = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  gap: 40px;
   width: 100%;
-  padding: 28px 24px 0;
+  padding: 48px 24px 52px;
   border-radius: var(--radius-4);
   border: 2px dashed var(--Borders-border_primary, var(--color-primary));
   background: var(--Background-bg_white, #fff);
-  overflow: hidden;
+
+  @media (max-width: 760px) {
+    gap: 28px;
+    padding: 32px 16px 40px;
+  }
 `;
 
 export const PreviewTitleRow = styled.div`
@@ -199,22 +203,27 @@ export const PdfChip = styled.span`
   font-family: Montserrat;
   font-size: 18px;
   font-weight: 700;
-  /* Overlaps the top edge of the document page below (panel gap is 20px). */
-  margin-bottom: -38px;
+  /* Half-overlaps the top edge of the page below (panel gap + 18px). */
+  margin-bottom: -58px;
   position: relative;
   z-index: 1;
+
+  @media (max-width: 760px) {
+    margin-bottom: -46px;
+  }
 `;
 
 /**
- * Shows the top of the processed document — the viewport height is 30%
- * of the full A4 page (0.3 × 1.414 × width), and the crop line sits
- * flush with the panel's bottom border.
+ * Placeholder for the visitor's processed document (the production
+ * funnel renders the real file preview here) — a full A4 page sized
+ * and shadowed per the reference mockup.
  */
-export const DocumentViewport = styled.div`
-  width: 76%;
-  max-width: 340px;
-  aspect-ratio: 1 / 0.424;
-  overflow: hidden;
+export const PlaceholderPage = styled.div`
+  width: 57%;
+  aspect-ratio: 1 / 1.414;
+  background: var(--Background-bg_white, #fff);
+  border-radius: var(--radius-2);
+  box-shadow: 0 4px 32px 0 rgba(17, 24, 40, 0.12);
   flex-shrink: 0;
 `;
 
