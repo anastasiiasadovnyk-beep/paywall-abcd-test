@@ -198,26 +198,6 @@ export const TrustItem = styled.div`
   gap: 10px;
 `;
 
-export const Stars = styled.span`
-  display: inline-flex;
-  align-items: center;
-  gap: 2px;
-
-  svg {
-    width: 20px;
-    height: 20px;
-    /* Solid amber — PDFLeader's badge/star accent. */
-    fill: #eba40c;
-  }
-
-  @media (max-width: 760px) {
-    svg {
-      width: 16px;
-      height: 16px;
-    }
-  }
-`;
-
 export const TrustDivider = styled.div`
   width: 1px;
   height: 18px;

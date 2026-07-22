@@ -3,12 +3,12 @@ import type { FC } from 'react';
 import { CHECKOUT, CHECKOUT_FILE } from '@/shared/constants/checkout';
 import { formatPlanPrice } from '@/shared/lib/price';
 import { DocumentMock } from '@/shared/ui/documentMock';
-import { StarIcon } from '@/shared/ui/icons';
 import { HeaderFlowSection } from '@/widgets/headerFlowSection';
 
 import { CheckoutDisclaimer } from '../components/checkoutDisclaimer';
 import { PaymentMethods } from '../components/paymentMethods';
 import { SecuredPaymentNote } from '../components/securedPaymentNote';
+import { TrustpilotRating } from '../components/trustpilotRating';
 import {
   Content,
   DisclaimerContainer,
@@ -22,7 +22,6 @@ import {
   ProgressFill,
   ProgressPercent,
   ProgressTrack,
-  Stars,
   Subtitle,
   Title,
   TotalDuePrice,
@@ -33,8 +32,6 @@ import {
   TrustItem,
   TrustRow,
 } from './groupB.styles';
-
-const STAR_COUNT = 5;
 
 /** Group B — checkout with a big download-progress panel. */
 export const GroupB: FC = () => {
@@ -66,14 +63,7 @@ export const GroupB: FC = () => {
             <ProgressFill style={{ width: `${CHECKOUT_FILE.progressPercentB}%` }} />
           </ProgressTrack>
           <TrustRow>
-            <TrustItem>
-              <Stars>
-                {Array.from({ length: STAR_COUNT }, (_, index) => (
-                  <StarIcon key={index} />
-                ))}
-              </Stars>
-              <b>4.8 TrustScore</b>
-            </TrustItem>
+            <TrustpilotRating score={4.8} />
             <TrustDivider />
             <TrustItem>10+ mln users</TrustItem>
             <TrustDivider />
