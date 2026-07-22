@@ -147,35 +147,75 @@ export const ProgressPercent = styled.div`
 `;
 
 export const PreviewPanel = styled.div`
-  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+  padding: 28px 24px 0;
+  border-radius: var(--radius-4);
+  border: 2px dashed var(--Borders-border_primary, var(--color-primary));
+  background: var(--Background-bg_white, #fff);
+  overflow: hidden;
+`;
+
+export const PreviewTitleRow = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--Text-text_default, #393939);
+  font-family: Montserrat;
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 28px;
+`;
+
+export const DocumentCheckBadge = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  padding: 40px;
-  border-radius: var(--radius-3);
-  background: linear-gradient(180deg, #d9dce1 0%, #c6cad1 100%);
+  width: 28px;
+  height: 28px;
+  border-radius: var(--radius-1);
+  background: #20c55b;
+  flex-shrink: 0;
+
+  svg {
+    width: 18px;
+    height: 18px;
+    fill: var(--color-common-white, #fff);
+  }
 `;
 
 export const PdfChip = styled.span`
-  position: absolute;
-  top: 16px;
-  left: 16px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  height: 28px;
-  padding: 0 10px;
+  height: 36px;
+  padding: 0 14px;
   border-radius: var(--radius-1);
   background: var(--color-error-main, #f23030);
   color: var(--color-common-white, #fff);
   font-family: Montserrat;
-  font-size: 14px;
+  font-size: 18px;
   font-weight: 700;
+  /* Overlaps the top edge of the document page below (panel gap is 20px). */
+  margin-bottom: -38px;
+  position: relative;
+  z-index: 1;
 `;
 
-export const PreviewDocument = styled.div`
-  width: 220px;
+/**
+ * Shows the top of the processed document — the viewport height is 30%
+ * of the full A4 page (0.3 × 1.414 × width), and the crop line sits
+ * flush with the panel's bottom border.
+ */
+export const DocumentViewport = styled.div`
+  width: 76%;
+  max-width: 340px;
+  aspect-ratio: 1 / 0.424;
+  overflow: hidden;
+  flex-shrink: 0;
 `;
 
 export const TimelineList = styled.div`

@@ -11,10 +11,11 @@ import featureConvert from '@/shared/ui/assets/features/feature-convert.svg';
 import featureEdit from '@/shared/ui/assets/features/feature-edit.svg';
 import featureMedia from '@/shared/ui/assets/features/feature-media.svg';
 import featureOrganize from '@/shared/ui/assets/features/feature-organize.svg';
-import { DocumentMock } from '@/shared/ui/documentMock';
+import { DocumentPage } from '@/shared/ui/documentPage';
 import {
   CalendarMonthIcon,
   CheckCircleIcon,
+  CheckIcon,
   LockIcon,
   VerifiedUserIcon,
 } from '@/shared/ui/icons';
@@ -34,11 +35,13 @@ import {
   FileCard,
   FileCardTitleRow,
   FileName,
+  DocumentCheckBadge,
+  DocumentViewport,
   LeftColumn,
   PageTitle,
   PdfChip,
-  PreviewDocument,
   PreviewPanel,
+  PreviewTitleRow,
   ProgressFill,
   ProgressPercent,
   ProgressRow,
@@ -95,10 +98,16 @@ export const GroupC: FC = () => {
             </FileCard>
 
             <PreviewPanel>
+              <PreviewTitleRow>
+                <DocumentCheckBadge>
+                  <CheckIcon />
+                </DocumentCheckBadge>
+                Your document is ready!
+              </PreviewTitleRow>
               <PdfChip>PDF</PdfChip>
-              <PreviewDocument>
-                <DocumentMock />
-              </PreviewDocument>
+              <DocumentViewport>
+                <DocumentPage />
+              </DocumentViewport>
             </PreviewPanel>
 
             <TimelineList>
