@@ -10,11 +10,27 @@ export const Content = styled.section`
   width: 100%;
   max-width: 1240px;
   padding: 0 40px;
-  margin: 40px auto 0;
+  margin: 16px auto 0;
 
   @media (max-width: 760px) {
     padding: 0 16px;
-    margin-top: 20px;
+    margin-top: 8px;
+  }
+`;
+
+export const PageTitle = styled.h1`
+  color: var(--Text-text_default, #393939);
+  text-align: center;
+  font-family: Montserrat;
+  font-size: 40px;
+  font-weight: 800;
+  line-height: 50px;
+  margin: 0 0 32px;
+
+  @media (max-width: 760px) {
+    font-size: 22px;
+    line-height: 28px;
+    margin-bottom: 20px;
   }
 `;
 

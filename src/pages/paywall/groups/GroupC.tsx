@@ -18,7 +18,7 @@ import {
   LockIcon,
   VerifiedUserIcon,
 } from '@/shared/ui/icons';
-import { HeaderTitleSection } from '@/widgets/headerTitleSection';
+import { HeaderFlowSection } from '@/widgets/headerFlowSection';
 
 import { CheckoutDisclaimer } from '../components/checkoutDisclaimer';
 import { PaymentMethods } from '../components/paymentMethods';
@@ -35,6 +35,7 @@ import {
   FileCardTitleRow,
   FileName,
   LeftColumn,
+  PageTitle,
   PdfChip,
   PreviewDocument,
   PreviewPanel,
@@ -74,8 +75,9 @@ export const GroupC: FC = () => {
 
   return (
     <>
-      <HeaderTitleSection title="Final step to download your file" />
+      <HeaderFlowSection />
       <Content>
+        <PageTitle>Final step to download your file</PageTitle>
         <CheckoutColumns>
           <LeftColumn>
             <FileCard data-testid="file-ready-card">
