@@ -9,7 +9,7 @@ export type TTrustBadge = 'cancel-anytime' | 'support' | 'users' | 'encrypted';
 const BADGE_CONTENT: Record<TTrustBadge, { icon: FC<{ className?: string }>; label: string }> = {
   'cancel-anytime': { icon: EventAvailableIcon, label: 'Cancel anytime' },
   support: { icon: HeadsetMicIcon, label: '24/7 customer support' },
-  users: { icon: VerifiedIcon, label: '10+ mln users' },
+  users: { icon: VerifiedIcon, label: '10+ million users' },
   encrypted: { icon: LockIcon, label: 'Encrypted connection' },
 };
 

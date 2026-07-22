@@ -22,12 +22,11 @@ const buttonBase = css`
 export const PaymentButtonsContainer = styled.div<{ $layout: TPaymentMethodsLayout }>`
   display: grid;
   grid-template-columns: ${({ $layout }) => ($layout === 'grid' ? '1fr 1fr' : '1fr')};
-  gap: ${({ $layout }) => ($layout === 'grid' ? '20px' : '12px')};
+  gap: 12px;
   width: 100%;
 
   @media (max-width: 760px) {
     grid-template-columns: 1fr;
-    gap: 12px;
   }
 `;
 

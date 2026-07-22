@@ -19,6 +19,7 @@ import {
   FileRow,
   FileThumbnail,
   PdfChip,
+  ProgressBarRow,
   ProgressFill,
   ProgressPercent,
   ProgressTrack,
@@ -57,15 +58,17 @@ export const GroupB: FC = () => {
               </FileNameRow>
               <FileMeta>{CHECKOUT_FILE.sizeLabel} · converted &amp; ready</FileMeta>
             </FileDetails>
-            <ProgressPercent>{CHECKOUT_FILE.progressPercentB}%</ProgressPercent>
           </FileRow>
-          <ProgressTrack>
-            <ProgressFill style={{ width: `${CHECKOUT_FILE.progressPercentB}%` }} />
-          </ProgressTrack>
+          <ProgressBarRow>
+            <ProgressTrack>
+              <ProgressFill style={{ width: `${CHECKOUT_FILE.progressPercentB}%` }} />
+            </ProgressTrack>
+            <ProgressPercent>{CHECKOUT_FILE.progressPercentB}%</ProgressPercent>
+          </ProgressBarRow>
           <TrustRow>
             <TrustpilotRating score={4.8} />
             <TrustDivider />
-            <TrustItem>10+ mln users</TrustItem>
+            <TrustItem>10+ million users</TrustItem>
             <TrustDivider />
             <TrustItem>Cancel anytime</TrustItem>
           </TrustRow>

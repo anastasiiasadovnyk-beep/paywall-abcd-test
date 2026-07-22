@@ -140,22 +140,29 @@ export const FileMeta = styled.div`
   }
 `;
 
+export const ProgressBarRow = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+`;
+
 export const ProgressPercent = styled.div`
   color: ${PROGRESS_GREEN};
   font-family: Montserrat;
-  font-size: 44px;
-  font-weight: 800;
-  line-height: 52px;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 22px;
   flex-shrink: 0;
 
   @media (max-width: 760px) {
-    font-size: 28px;
-    line-height: 34px;
+    font-size: 14px;
+    line-height: 18px;
   }
 `;
 
 export const ProgressTrack = styled.div`
-  width: 100%;
+  flex: 1;
   height: 12px;
   border-radius: var(--radius-8);
   /* Light-grey track so it stays visible on the white panel. */
