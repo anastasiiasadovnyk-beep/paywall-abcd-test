@@ -1,66 +1,152 @@
-import { type FC, useState } from 'react';
+import type { FC } from 'react';
 
-import { PLANS, type IPlan } from '@/shared/constants/plans';
-import { FilePreviewCard } from '@/widgets/filePreviewCard';
-import { PricingFeaturesSection } from '@/widgets/pricingFeaturesSection';
-
-import { ContinueButton } from '../components/continueButton';
-import { SmallFileProgress } from '../components/fileProgress';
-import { PlanDisclaimer } from '../components/planDisclaimer';
-import { PlanFeaturesList } from '../components/planFeaturesList';
-import { PlansSelector } from '../components/plansSelector';
 import {
-  Content,
-  DesktopOnly,
-  HeroSectionsContainer,
-  MobileDisclaimer,
-  PlansContent,
-  PlansFormContainer,
-  Title,
-} from '../styles';
+  CHECKOUT,
+  CHECKOUT_FILE,
+  TRIAL_TIMELINE,
+  UNLOCK_FEATURES,
+} from '@/shared/constants/checkout';
+import { formatPlanPrice } from '@/shared/lib/price';
+import featureConvert from '@/shared/ui/assets/features/feature-convert.svg';
+import featureEdit from '@/shared/ui/assets/features/feature-edit.svg';
+import featureMedia from '@/shared/ui/assets/features/feature-media.svg';
+import featureOrganize from '@/shared/ui/assets/features/feature-organize.svg';
+import { DocumentMock } from '@/shared/ui/documentMock';
+import {
+  CalendarMonthIcon,
+  CheckCircleIcon,
+  LockIcon,
+  VerifiedUserIcon,
+} from '@/shared/ui/icons';
+import { HeaderTitleSection } from '@/widgets/headerTitleSection';
 
-/**
- * Group C — control screen plus a compact progress strip right above
- * the page title.
- */
+import { CheckoutDisclaimer } from '../components/checkoutDisclaimer';
+import { PaymentMethods } from '../components/paymentMethods';
+import { TrustBadges } from '../components/trustBadges';
+import {
+  CheckoutColumns,
+  Content,
+  FeatureCard,
+  FeatureDescription,
+  FeatureGrid,
+  FeatureIllustration,
+  FeatureTitle,
+  FileCard,
+  FileCardTitleRow,
+  FileName,
+  LeftColumn,
+  PdfChip,
+  PreviewDocument,
+  PreviewPanel,
+  ProgressFill,
+  ProgressPercent,
+  ProgressRow,
+  ProgressTrack,
+  RightColumn,
+  TimelineDescription,
+  TimelineIcon,
+  TimelineItem,
+  TimelineList,
+  TimelineTexts,
+  TimelineTitle,
+  TotalDuePrice,
+  TotalDueRow,
+  TotalDueTitle,
+  UnlockTitle,
+} from './groupC.styles';
+
+const TIMELINE_ICONS = {
+  lock: LockIcon,
+  calendar: CalendarMonthIcon,
+  shield: VerifiedUserIcon,
+} as const;
+
+const FEATURE_ILLUSTRATIONS = {
+  edit: featureEdit,
+  convert: featureConvert,
+  organize: featureOrganize,
+  media: featureMedia,
+} as const;
+
+/** Group C — checkout with a small progress bar and trial timeline. */
 export const GroupC: FC = () => {
-  const [selectedPlan, setSelectedPlan] = useState<IPlan>(PLANS[0]);
+  const trialPrice = formatPlanPrice(CHECKOUT.trialPriceCents);
 
   return (
-    <Content>
-      <SmallFileProgress percent={90} />
+    <>
+      <HeaderTitleSection title="Final step to download your file" />
+      <Content>
+        <CheckoutColumns>
+          <LeftColumn>
+            <FileCard data-testid="file-ready-card">
+              <FileCardTitleRow>
+                <CheckCircleIcon />
+                Your file is almost ready!
+              </FileCardTitleRow>
+              <FileName>{CHECKOUT_FILE.compressedFileName}</FileName>
+              <ProgressRow>
+                <ProgressTrack>
+                  <ProgressFill style={{ width: `${CHECKOUT_FILE.progressPercentC}%` }} />
+                </ProgressTrack>
+                <ProgressPercent>{CHECKOUT_FILE.progressPercentC}%</ProgressPercent>
+              </ProgressRow>
+            </FileCard>
 
-      <Title>Pick a plan and get your file</Title>
+            <PreviewPanel>
+              <PdfChip>PDF</PdfChip>
+              <PreviewDocument>
+                <DocumentMock />
+              </PreviewDocument>
+            </PreviewPanel>
 
-      <HeroSectionsContainer>
-        <PlansContent>
-          <PlansFormContainer>
-            <PlansSelector
-              plans={PLANS}
-              selectedPlanId={selectedPlan.id}
-              onSelectPlan={setSelectedPlan}
-            />
-            <ContinueButton />
-          </PlansFormContainer>
-          <PlanFeaturesList />
-          <DesktopOnly>
-            <PlanDisclaimer
-              kind={selectedPlan.disclaimer}
-              recurringPrice={selectedPlan.recurringPrice}
-            />
-          </DesktopOnly>
-        </PlansContent>
-        <FilePreviewCard />
-      </HeroSectionsContainer>
+            <TimelineList>
+              {TRIAL_TIMELINE.map((item) => {
+                const Icon = TIMELINE_ICONS[item.icon];
 
-      <MobileDisclaimer data-testid="plan-disclaimer-mobile">
-        <PlanDisclaimer
-          kind={selectedPlan.disclaimer}
-          recurringPrice={selectedPlan.recurringPrice}
-        />
-      </MobileDisclaimer>
+                return (
+                  <TimelineItem key={item.title}>
+                    <TimelineIcon>
+                      <Icon />
+                    </TimelineIcon>
+                    <TimelineTexts>
+                      <TimelineTitle>{item.title}</TimelineTitle>
+                      <TimelineDescription>{item.description}</TimelineDescription>
+                    </TimelineTexts>
+                  </TimelineItem>
+                );
+              })}
+            </TimelineList>
 
-      <PricingFeaturesSection />
-    </Content>
+            <TrustBadges badges={['encrypted', 'support', 'users']} />
+          </LeftColumn>
+
+          <RightColumn>
+            <TotalDueRow>
+              <TotalDueTitle>Total due today:</TotalDueTitle>
+              <TotalDuePrice data-testid="total-due-price">{trialPrice}</TotalDuePrice>
+            </TotalDueRow>
+
+            <PaymentMethods layout="stacked" cardStyle="light" />
+
+            <CheckoutDisclaimer variant="full" align="justify" />
+
+            <UnlockTitle>Everything unlocks the moment you start</UnlockTitle>
+            <FeatureGrid>
+              {UNLOCK_FEATURES.map((feature) => (
+                <FeatureCard key={feature.title}>
+                  <FeatureIllustration
+                    src={FEATURE_ILLUSTRATIONS[feature.illustration]}
+                    alt=""
+                    role="presentation"
+                  />
+                  <FeatureTitle>{feature.title}</FeatureTitle>
+                  <FeatureDescription>{feature.description}</FeatureDescription>
+                </FeatureCard>
+              ))}
+            </FeatureGrid>
+          </RightColumn>
+        </CheckoutColumns>
+      </Content>
+    </>
   );
 };

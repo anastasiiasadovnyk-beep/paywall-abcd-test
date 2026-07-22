@@ -1,69 +1,70 @@
 import { type FC, useState } from 'react';
 
-import {
-  PRICE_CHOICE_RECURRING,
-  PRICE_CHOICES,
-  type IPriceChoice,
-} from '@/shared/constants/plans';
-import { FilePreviewCard } from '@/widgets/filePreviewCard';
-import { PricingFeaturesSection } from '@/widgets/pricingFeaturesSection';
+import { PRICE_CHOICES } from '@/shared/constants/checkout';
+import { NorthEastIcon } from '@/shared/ui/icons';
+import { HeaderFlowSection } from '@/widgets/headerFlowSection';
 
 import { ContinueButton } from '../components/continueButton';
-import { PlanDisclaimer } from '../components/planDisclaimer';
-import { PlanFeaturesList } from '../components/planFeaturesList';
-import { PriceChoiceSelector } from '../components/priceChoiceSelector';
 import {
+  ChoiceCard,
   Content,
-  DesktopOnly,
-  HeroSectionsContainer,
-  MobileDisclaimer,
-  PlansContent,
-  PlansFormContainer,
-  Subtitle,
+  Footnote,
+  IntroPanel,
+  PriceBox,
+  PriceBoxesGrid,
+  SectionHeading,
+  SupporterNote,
   Title,
-} from '../styles';
-
-const DEFAULT_CHOICE =
-  PRICE_CHOICES.find((choice) => choice.isMostPopular) ?? PRICE_CHOICES[0];
+} from './groupD.styles';
 
 /**
- * Group D — "choose your price": the visitor decides how much the 7-day
- * trial costs; every option unlocks the same full access.
+ * Group D — "choose your price": the visitor picks what the 7-day trial
+ * costs; every option unlocks the same full access.
  */
 export const GroupD: FC = () => {
-  const [selectedChoice, setSelectedChoice] = useState<IPriceChoice>(DEFAULT_CHOICE);
+  const [selectedChoiceId, setSelectedChoiceId] = useState<string | null>(null);
 
   return (
-    <Content>
-      <Title>Choose your price</Title>
-      <Subtitle>
-        Every option unlocks the same 7-day full access to all PDFLeader tools. Pick the price
-        that feels right for you.
-      </Subtitle>
+    <>
+      <HeaderFlowSection activeStep={0} />
+      <Content>
+        <Title>Choose a price for your 7-day trial</Title>
 
-      <HeroSectionsContainer>
-        <PlansContent>
-          <PlansFormContainer>
-            <PriceChoiceSelector
-              choices={PRICE_CHOICES}
-              selectedChoiceId={selectedChoice.id}
-              onSelectChoice={setSelectedChoice}
-            />
-            <ContinueButton />
-          </PlansFormContainer>
-          <PlanFeaturesList />
-          <DesktopOnly>
-            <PlanDisclaimer kind="trial" recurringPrice={PRICE_CHOICE_RECURRING} />
-          </DesktopOnly>
-        </PlansContent>
-        <FilePreviewCard />
-      </HeroSectionsContainer>
+        <ChoiceCard>
+          <IntroPanel>
+            <p>Money shouldn’t stand in the way of getting your file done.</p>
+            <p>
+              <b>It costs us approximately $10* to offer a 7-day trial.</b> Please pick an amount
+              that’s reasonable for you.
+            </p>
+          </IntroPanel>
 
-      <MobileDisclaimer data-testid="plan-disclaimer-mobile">
-        <PlanDisclaimer kind="trial" recurringPrice={PRICE_CHOICE_RECURRING} />
-      </MobileDisclaimer>
+          <SectionHeading>Pick your trial price — the access is the same</SectionHeading>
 
-      <PricingFeaturesSection />
-    </Content>
+          <PriceBoxesGrid>
+            {PRICE_CHOICES.map((choice) => (
+              <PriceBox
+                key={choice.id}
+                type="button"
+                $selected={selectedChoiceId === choice.id}
+                data-testid="price-choice"
+                onClick={() => setSelectedChoiceId(choice.id)}
+              >
+                {choice.label}
+              </PriceBox>
+            ))}
+          </PriceBoxesGrid>
+
+          <SupporterNote>
+            This option will help us support those who need to select the lowest trial prices!
+            <NorthEastIcon />
+          </SupporterNote>
+
+          <ContinueButton disabled={!selectedChoiceId} />
+
+          <Footnote>*Cost of trial as of July 2026</Footnote>
+        </ChoiceCard>
+      </Content>
+    </>
   );
 };

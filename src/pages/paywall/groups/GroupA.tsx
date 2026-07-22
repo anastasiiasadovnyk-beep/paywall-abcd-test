@@ -1,60 +1,96 @@
-import { type FC, useState } from 'react';
+import type { FC } from 'react';
 
-import { PLANS, type IPlan } from '@/shared/constants/plans';
-import { FilePreviewCard } from '@/widgets/filePreviewCard';
-import { PricingFeaturesSection } from '@/widgets/pricingFeaturesSection';
+import { CHECKOUT, CHECKOUT_FILE, TRIAL_INCLUDES } from '@/shared/constants/checkout';
+import { formatPlanPrice } from '@/shared/lib/price';
+import { DocumentMock } from '@/shared/ui/documentMock';
+import { CheckIcon } from '@/shared/ui/icons';
+import { PriceWithSup } from '@/shared/ui/priceWithSup';
+import { HeaderFlowSection } from '@/widgets/headerFlowSection';
 
-import { ContinueButton } from '../components/continueButton';
-import { PlanDisclaimer } from '../components/planDisclaimer';
-import { PlanFeaturesList } from '../components/planFeaturesList';
-import { PlansSelector } from '../components/plansSelector';
+import { CheckoutDisclaimer } from '../components/checkoutDisclaimer';
+import { PaymentMethods } from '../components/paymentMethods';
+import { SecuredPaymentNote } from '../components/securedPaymentNote';
+import { TrustBadges } from '../components/trustBadges';
 import {
+  CheckoutColumns,
   Content,
-  DesktopOnly,
-  HeroSectionsContainer,
-  MobileDisclaimer,
-  PlansContent,
-  PlansFormContainer,
-  Title,
-} from '../styles';
+  FileName,
+  FilePdfSuffix,
+  FileReadyCard,
+  FileReadyInfo,
+  FileReadyThumbnail,
+  FileReadyTitle,
+  IncludesCard,
+  IncludesDivider,
+  IncludesItem,
+  IncludesList,
+  IncludesTitle,
+  IncludesTotalRow,
+  PaymentCard,
+  PaymentColumn,
+  SideColumn,
+  TotalDuePrice,
+  TotalDueRow,
+  TotalDueTitle,
+} from './groupA.styles';
 
-/** Group A — default control screen (mirrors the live pricing page). */
+/** Group A — default checkout screen (control). */
 export const GroupA: FC = () => {
-  const [selectedPlan, setSelectedPlan] = useState<IPlan>(PLANS[0]);
+  const trialPrice = formatPlanPrice(CHECKOUT.trialPriceCents);
 
   return (
-    <Content>
-      <Title>Pick a plan and get your file</Title>
+    <>
+      <HeaderFlowSection activeStep={1} hideFirstStep />
+      <Content>
+        <CheckoutColumns>
+          <PaymentColumn>
+            <PaymentCard>
+              <TotalDueRow>
+                <TotalDueTitle>Total due today:</TotalDueTitle>
+                <TotalDuePrice data-testid="total-due-price">
+                  <PriceWithSup price={trialPrice} />
+                </TotalDuePrice>
+              </TotalDueRow>
+              <PaymentMethods layout="stacked" cardStyle="dark" />
+              <CheckoutDisclaimer variant="full" align="justify" />
+              <TrustBadges badges={['cancel-anytime', 'support', 'users']} />
+            </PaymentCard>
+            <SecuredPaymentNote />
+          </PaymentColumn>
 
-      <HeroSectionsContainer>
-        <PlansContent>
-          <PlansFormContainer>
-            <PlansSelector
-              plans={PLANS}
-              selectedPlanId={selectedPlan.id}
-              onSelectPlan={setSelectedPlan}
-            />
-            <ContinueButton />
-          </PlansFormContainer>
-          <PlanFeaturesList />
-          <DesktopOnly>
-            <PlanDisclaimer
-              kind={selectedPlan.disclaimer}
-              recurringPrice={selectedPlan.recurringPrice}
-            />
-          </DesktopOnly>
-        </PlansContent>
-        <FilePreviewCard />
-      </HeroSectionsContainer>
+          <SideColumn>
+            <FileReadyCard data-testid="file-ready-card">
+              <FileReadyInfo>
+                <FileReadyTitle>Your file is ready!</FileReadyTitle>
+                <FileName>
+                  {CHECKOUT_FILE.longFileName.replace('.pdf', '')}
+                  <FilePdfSuffix>pdf</FilePdfSuffix>
+                </FileName>
+              </FileReadyInfo>
+              <FileReadyThumbnail>
+                <DocumentMock />
+              </FileReadyThumbnail>
+            </FileReadyCard>
 
-      <MobileDisclaimer data-testid="plan-disclaimer-mobile">
-        <PlanDisclaimer
-          kind={selectedPlan.disclaimer}
-          recurringPrice={selectedPlan.recurringPrice}
-        />
-      </MobileDisclaimer>
-
-      <PricingFeaturesSection />
-    </Content>
+            <IncludesCard data-testid="trial-includes-card">
+              <IncludesTitle>Your 7-day trial includes:</IncludesTitle>
+              <IncludesList>
+                {TRIAL_INCLUDES.map((item) => (
+                  <IncludesItem key={item.text} $bold={item.isBold}>
+                    <CheckIcon />
+                    {item.text}
+                  </IncludesItem>
+                ))}
+              </IncludesList>
+              <IncludesDivider />
+              <IncludesTotalRow>
+                <span>Total due today:</span>
+                <b data-testid="includes-total-price">{trialPrice}</b>
+              </IncludesTotalRow>
+            </IncludesCard>
+          </SideColumn>
+        </CheckoutColumns>
+      </Content>
+    </>
   );
 };

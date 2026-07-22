@@ -1,14 +1,16 @@
 # Paywall — A/B/C/D test
 
-PDFLeader paywall (select plan) screen with four experiment variants, built as a
-standalone React app for design review and developer handoff.
+PDFLeader checkout paywall with four experiment variants, built as a
+standalone React app for design review and developer handoff. Groups A–C
+reproduce the reference mockups; group D applies the "choose your price"
+idea in PDFLeader's visual style.
 
-| Group | URL | What changes vs. control |
-| ----- | --- | ------------------------ |
-| **A** | `/?group=a` | Default control screen (mirrors the live pricing page) |
-| **B** | `/?group=b` | Big progress banner ("Your file is almost ready!", 90% bar + illustration) between the header and the plans |
-| **C** | `/?group=c` | Small progress strip (label + slim 90% bar) right above the page title |
-| **D** | `/?group=d` | "Choose your price" — three trial-price options ($1.95 / $5.95 / $9.95) instead of the plan list |
+| Group | URL | Screen |
+| ----- | --- | ------ |
+| **A** | `/?group=a` | Default checkout (control): payment card with PayPal / Google Pay / Apple Pay / card, legal disclaimer, trust badges; file-ready card and "Your 7-day trial includes" summary on the right |
+| **B** | `/?group=b` | Big progress bar: centered layout with a large download panel (file, 95% green bar, TrustScore row) above the payment methods |
+| **C** | `/?group=c` | Small progress bar: title header, compact file card with a slim 89% bar, document preview, trial timeline; payments and an illustrated "everything unlocks" grid on the right |
+| **D** | `/?group=d` | Choose your price: the visitor picks what the 7-day trial costs ($0.50 / $3 / $10 / $18.37); Continue stays disabled until a price is chosen |
 
 The visitor's group is resolved in `src/shared/abTest`: the `?group=` query
 parameter always wins and is persisted to localStorage; the control group A is
@@ -46,8 +48,9 @@ in your user-level `~/.npmrc` (never commit tokens to this repository):
 - **Icons:** Google [Material Icons](https://github.com/google/material-design-icons)
   via `@material-design-icons/svg` (rounded style), re-exported from
   `src/shared/ui/icons.ts`.
-- **Illustrations:** exported from the PDFLeader graphic set in Figma
-  (`src/shared/ui/assets/folder-with-file.svg`, `pdf-file-ready.svg`).
+- **Brand assets:** payment method and card-brand logos come from the
+  `pdfleader-fe` checkout assets; feature illustrations are exported from the
+  PDFLeader graphic set in Figma (`src/shared/ui/assets/features`).
 - **Typography:** Montserrat (woff2 files in `public/fonts`, declared in
   `index.html`).
 
@@ -56,32 +59,34 @@ in your user-level `~/.npmrc` (never commit tokens to this repository):
 ```
 src/
 ├── app/                  # App shell: router, Toaster, global styles/tokens
-├── pages/paywall/        # The paywall screen
-│   ├── groups/           # GroupA…GroupD — one component per test variant
-│   ├── components/       # plansSelector, priceChoiceSelector, fileProgress,
-│   │                     # continueButton, planFeaturesList, planDisclaimer,
-│   │                     # groupSwitcher (dev-only)
-│   └── styles.tsx        # Shared page layout (Content, Title, hero split)
-├── widgets/              # headerFlowSection, filePreviewCard,
-│                         # pricingFeaturesSection, footerSection
+├── pages/paywall/        # The checkout paywall screen
+│   ├── groups/           # GroupA…GroupD — one component (+styles) per variant
+│   └── components/       # paymentMethods, checkoutDisclaimer, trustBadges,
+│                         # securedPaymentNote, continueButton,
+│                         # groupSwitcher (dev-only)
+├── widgets/              # headerFlowSection (logo + numbered steps),
+│                         # headerTitleSection (logo + page title),
+│                         # footerSection
 └── shared/
     ├── abTest/           # Experiment group resolution
-    ├── constants/        # plans.ts (mock catalogue, prices in USD cents)
+    ├── constants/        # checkout.ts (mock data, prices in USD cents)
     ├── lib/              # designSystem init, price formatting
-    └── ui/               # icons, BorderedCardCheckmark, PriceWithSup, assets
+    └── ui/               # icons, DocumentMock, PriceWithSup, assets
 ```
 
 ## Mock data
 
-Plan names, prices and legal copy live in `src/shared/constants/plans.ts` and
-mirror the shape of the payments backend (prices in cents — the design
-system's `formatPrice` expects cents). The legal links in
-`src/shared/constants/pageLinks.ts` are placeholders.
+Prices, file names, trial checklist and legal contacts live in
+`src/shared/constants/checkout.ts` and mirror the shape of the payments
+backend (prices in cents — the design system's `formatPrice` expects cents).
+Payment buttons are presentational; the production funnel wires them to the
+payment SDK. The legal links in `src/shared/constants/pageLinks.ts` are
+placeholders.
 
 ## Notes for reviewers
 
-- No analytics, i18n or Redux — this is a design deliverable; the group
-  components are intentionally kept close to the `pdfleader-fe` pricing page
-  structure so they can be ported back easily.
+- No analytics, i18n or Redux — this is a design deliverable; component
+  structure follows the `pdfleader-fe` conventions (FSD-flavoured layers,
+  styled-components with design tokens) so screens can be ported back easily.
 - `npm run build` is available but build output (`dist/`) is git-ignored;
   review the source, not artifacts.

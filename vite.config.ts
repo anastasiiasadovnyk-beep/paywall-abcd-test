@@ -20,6 +20,8 @@ export default defineConfig({
       svgrOptions: {
         exportType: 'named',
         namedExport: 'ReactComponent',
+        // Forward refs properly — avoids React's forwardRef dev warning.
+        ref: true,
       },
     }),
     tsconfigPaths(),

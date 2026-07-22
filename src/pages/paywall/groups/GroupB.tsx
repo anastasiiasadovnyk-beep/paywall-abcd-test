@@ -1,66 +1,103 @@
-import { type FC, useState } from 'react';
+import type { FC } from 'react';
 
-import { PLANS, type IPlan } from '@/shared/constants/plans';
-import { FilePreviewCard } from '@/widgets/filePreviewCard';
-import { PricingFeaturesSection } from '@/widgets/pricingFeaturesSection';
+import { CHECKOUT, CHECKOUT_FILE } from '@/shared/constants/checkout';
+import { formatPlanPrice } from '@/shared/lib/price';
+import { DocumentMock } from '@/shared/ui/documentMock';
+import { StarIcon } from '@/shared/ui/icons';
+import { HeaderFlowSection } from '@/widgets/headerFlowSection';
 
-import { ContinueButton } from '../components/continueButton';
-import { BigFileProgress } from '../components/fileProgress';
-import { PlanDisclaimer } from '../components/planDisclaimer';
-import { PlanFeaturesList } from '../components/planFeaturesList';
-import { PlansSelector } from '../components/plansSelector';
+import { CheckoutDisclaimer } from '../components/checkoutDisclaimer';
+import { PaymentMethods } from '../components/paymentMethods';
+import { SecuredPaymentNote } from '../components/securedPaymentNote';
 import {
   Content,
-  DesktopOnly,
-  HeroSectionsContainer,
-  MobileDisclaimer,
-  PlansContent,
-  PlansFormContainer,
+  DisclaimerContainer,
+  DownloadPanel,
+  FileDetails,
+  FileMeta,
+  FileNameRow,
+  FileRow,
+  FileThumbnail,
+  PdfChip,
+  ProgressFill,
+  ProgressPercent,
+  ProgressTrack,
+  Stars,
+  Subtitle,
   Title,
-} from '../styles';
+  TotalDuePrice,
+  TotalDueRow,
+  TotalDueTitle,
+  TrialCaption,
+  TrustDivider,
+  TrustItem,
+  TrustRow,
+} from './groupB.styles';
 
-/**
- * Group B — control screen plus a big, attention-grabbing progress
- * banner between the header and the plans.
- */
+const STAR_COUNT = 5;
+
+/** Group B — checkout with a big download-progress panel. */
 export const GroupB: FC = () => {
-  const [selectedPlan, setSelectedPlan] = useState<IPlan>(PLANS[0]);
+  const trialPrice = formatPlanPrice(CHECKOUT.trialPriceCents);
+  const recurringPrice = formatPlanPrice(CHECKOUT.recurringPriceCents);
 
   return (
-    <Content>
-      <BigFileProgress percent={90} />
+    <>
+      <HeaderFlowSection activeStep={1} hideFirstStep />
+      <Content>
+        <Title>Your download is almost complete</Title>
+        <Subtitle>It starts the moment your payment goes through.</Subtitle>
 
-      <Title>Pick a plan and get your file</Title>
+        <DownloadPanel data-testid="download-panel">
+          <FileRow>
+            <FileThumbnail>
+              <DocumentMock />
+            </FileThumbnail>
+            <FileDetails>
+              <FileNameRow>
+                <PdfChip>PDF</PdfChip>
+                {CHECKOUT_FILE.longFileName}
+              </FileNameRow>
+              <FileMeta>{CHECKOUT_FILE.sizeLabel} · converted &amp; ready</FileMeta>
+            </FileDetails>
+            <ProgressPercent>{CHECKOUT_FILE.progressPercentB}%</ProgressPercent>
+          </FileRow>
+          <ProgressTrack>
+            <ProgressFill style={{ width: `${CHECKOUT_FILE.progressPercentB}%` }} />
+          </ProgressTrack>
+          <TrustRow>
+            <TrustItem>
+              <Stars>
+                {Array.from({ length: STAR_COUNT }, (_, index) => (
+                  <StarIcon key={index} />
+                ))}
+              </Stars>
+              <b>4.8 TrustScore</b>
+            </TrustItem>
+            <TrustDivider />
+            <TrustItem>10+ mln users</TrustItem>
+            <TrustDivider />
+            <TrustItem>Cancel anytime</TrustItem>
+          </TrustRow>
+        </DownloadPanel>
 
-      <HeroSectionsContainer>
-        <PlansContent>
-          <PlansFormContainer>
-            <PlansSelector
-              plans={PLANS}
-              selectedPlanId={selectedPlan.id}
-              onSelectPlan={setSelectedPlan}
-            />
-            <ContinueButton />
-          </PlansFormContainer>
-          <PlanFeaturesList />
-          <DesktopOnly>
-            <PlanDisclaimer
-              kind={selectedPlan.disclaimer}
-              recurringPrice={selectedPlan.recurringPrice}
-            />
-          </DesktopOnly>
-        </PlansContent>
-        <FilePreviewCard />
-      </HeroSectionsContainer>
+        <TotalDueRow>
+          <TotalDueTitle>Total due today</TotalDueTitle>
+          <TotalDuePrice data-testid="total-due-price">{trialPrice}</TotalDuePrice>
+        </TotalDueRow>
 
-      <MobileDisclaimer data-testid="plan-disclaimer-mobile">
-        <PlanDisclaimer
-          kind={selectedPlan.disclaimer}
-          recurringPrice={selectedPlan.recurringPrice}
-        />
-      </MobileDisclaimer>
+        <PaymentMethods layout="grid" cardStyle="dark" />
 
-      <PricingFeaturesSection />
-    </Content>
+        <TrialCaption>
+          7-day trial for {trialPrice} · then {recurringPrice} every 4 weeks · cancel anytime
+        </TrialCaption>
+
+        <DisclaimerContainer>
+          <CheckoutDisclaimer variant="short" align="left" />
+        </DisclaimerContainer>
+
+        <SecuredPaymentNote />
+      </Content>
+    </>
   );
 };

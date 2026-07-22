@@ -2,7 +2,6 @@ import type { FC } from 'react';
 
 import { EPaywallGroup, usePaywallGroup } from '@/shared/abTest';
 import { FooterSection } from '@/widgets/footerSection';
-import { HeaderFlowSection } from '@/widgets/headerFlowSection';
 
 import { GroupSwitcher } from './components/groupSwitcher';
 import { GroupA } from './groups/GroupA';
@@ -19,8 +18,9 @@ const GROUP_COMPONENTS: Record<EPaywallGroup, FC> = {
 };
 
 /**
- * Paywall (select plan) screen. The rendered layout depends on the
- * visitor's A/B/C/D experiment group — see src/shared/abTest.
+ * Checkout paywall screen. The rendered layout depends on the visitor's
+ * A/B/C/D experiment group — see src/shared/abTest. Each group renders
+ * its own header variant, so only the footer is shared here.
  */
 const PaywallPage: FC = () => {
   const group = usePaywallGroup();
@@ -28,7 +28,6 @@ const PaywallPage: FC = () => {
 
   return (
     <PageContainer>
-      <HeaderFlowSection activeStep={0} />
       <GroupScreen />
       <FooterSection />
       {import.meta.env.DEV && <GroupSwitcher activeGroup={group} />}
