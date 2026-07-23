@@ -9,7 +9,6 @@ import { formatPlanPrice } from '@/shared/lib/price';
 import { Divider } from '@/shared/ui/divider';
 import { DocumentMock } from '@/shared/ui/documentMock';
 import { CheckIcon, NorthEastIcon } from '@/shared/ui/icons';
-import { PriceWithSup } from '@/shared/ui/priceWithSup';
 import { HeaderFlowSection } from '@/widgets/headerFlowSection';
 
 import { CheckoutDisclaimer } from '../components/checkoutDisclaimer';
@@ -32,9 +31,6 @@ import {
   PaymentCard,
   PaymentColumn,
   SideColumn,
-  TotalDuePrice,
-  TotalDueRow,
-  TotalDueTitle,
 } from './groupA.styles';
 import {
   ChoiceColumns,
@@ -99,17 +95,6 @@ export const GroupD: FC = () => {
                 </SupporterNote>
                 <Footnote>*Cost of trial as of July 2026</Footnote>
               </div>
-
-              <TotalDueRow>
-                <TotalDueTitle>Total due today:</TotalDueTitle>
-                <TotalDuePrice data-testid="total-due-price">
-                  {selectedChoice ? (
-                    <PriceWithSup price={formatPlanPrice(selectedChoice.cents)} />
-                  ) : (
-                    '—'
-                  )}
-                </TotalDuePrice>
-              </TotalDueRow>
 
               <PaymentSection $locked={!selectedChoice} aria-disabled={!selectedChoice}>
                 <PaymentMethods layout="stacked" cardStyle="dark" />
