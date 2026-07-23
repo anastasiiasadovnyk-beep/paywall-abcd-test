@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
-/* Official Trustpilot widget palette. */
-const TRUSTPILOT_GREEN = '#00b67a';
+/* Official Trustpilot widget text color. */
 const TRUSTPILOT_BLACK = '#191919';
 
 export const RatingContainer = styled.div`
@@ -42,31 +41,13 @@ export const ScoreText = styled.span`
   }
 `;
 
-export const BrandMark = styled.span`
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-  color: ${TRUSTPILOT_BLACK};
-  font-family: Montserrat;
-  font-size: 18px;
-  font-weight: 600;
-  line-height: 24px;
-  white-space: nowrap;
-
-  svg {
-    width: 22px;
-    height: 22px;
-    fill: ${TRUSTPILOT_GREEN};
-    flex-shrink: 0;
-  }
+/** Official Trustpilot logo, matched to the height of the adjacent text. */
+export const TrustpilotLogo = styled.img`
+  height: 18px;
+  width: auto;
+  flex-shrink: 0;
 
   @media (max-width: 760px) {
-    font-size: 14px;
-    line-height: 18px;
-
-    svg {
-      width: 17px;
-      height: 17px;
-    }
+    height: 14px;
   }
 `;

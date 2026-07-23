@@ -1,8 +1,8 @@
 import type { FC } from 'react';
 
-import { ReactComponent as TrustpilotStar } from '@/shared/ui/assets/trustpilot-star.svg?react';
+import trustpilotLogo from '@/shared/ui/assets/trustpilot-logo.svg';
 
-import { BrandMark, ExcellentText, RatingContainer, ScoreText } from './styles';
+import { ExcellentText, RatingContainer, ScoreText, TrustpilotLogo } from './styles';
 
 interface ITrustpilotRatingProps {
   score?: number;
@@ -10,7 +10,7 @@ interface ITrustpilotRatingProps {
 
 /**
  * Trustpilot rating in the official micro-widget layout: the rating
- * word, the score out of 5, and the Trustpilot star + wordmark.
+ * word, the score out of 5, and the official Trustpilot logo.
  * Typography is the PDFLeader brand font per design guidelines.
  */
 export const TrustpilotRating: FC<ITrustpilotRatingProps> = ({ score = 4.8 }) => {
@@ -20,10 +20,7 @@ export const TrustpilotRating: FC<ITrustpilotRatingProps> = ({ score = 4.8 }) =>
       <ScoreText>
         <b>{score}</b> out of 5
       </ScoreText>
-      <BrandMark>
-        <TrustpilotStar />
-        Trustpilot
-      </BrandMark>
+      <TrustpilotLogo src={trustpilotLogo} alt="Trustpilot" />
     </RatingContainer>
   );
 };

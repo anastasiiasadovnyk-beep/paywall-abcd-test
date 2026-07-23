@@ -8,7 +8,7 @@ import {
 import { formatPlanPrice } from '@/shared/lib/price';
 import { Divider } from '@/shared/ui/divider';
 import { DocumentPlaceholder } from '@/shared/ui/documentPlaceholder';
-import { CheckIcon, NorthEastIcon } from '@/shared/ui/icons';
+import { CheckIcon } from '@/shared/ui/icons';
 import { HeaderFlowSection } from '@/widgets/headerFlowSection';
 
 import { CheckoutDisclaimer } from '../components/checkoutDisclaimer';
@@ -33,13 +33,11 @@ import {
 } from './groupA.styles';
 import {
   ChoiceColumns,
-  Footnote,
   PaymentSection,
   PlainIncludesCard,
   PriceBox,
   PriceBoxesGrid,
   PriceSection,
-  SupporterNote,
   Title,
 } from './groupD.styles';
 
@@ -57,11 +55,10 @@ export const GroupD: FC = () => {
     <>
       <HeaderFlowSection />
       <Content>
-        <Title>Choose a price for your 7-day trial</Title>
-
         <ChoiceColumns>
           <PaymentColumn>
             <PaymentCard>
+              <Title>Choose a price for your 7-day trial</Title>
               <PriceSection>
                 <PriceBoxesGrid>
                   {PRICE_CHOICES.map((choice) => (
@@ -77,12 +74,6 @@ export const GroupD: FC = () => {
                     </PriceBox>
                   ))}
                 </PriceBoxesGrid>
-                <SupporterNote>
-                  This option will help us support those who need to select the lowest trial
-                  prices!
-                  <NorthEastIcon />
-                </SupporterNote>
-                <Footnote>*Cost of trial as of July 2026</Footnote>
               </PriceSection>
 
               <PaymentSection $locked={!selectedChoice} aria-disabled={!selectedChoice}>

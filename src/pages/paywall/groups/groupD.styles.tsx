@@ -9,19 +9,19 @@ export const PlainIncludesCard = styled(IncludesCard)`
   padding: 0;
 `;
 
+/** Card heading above the price selection — design system title-4. */
 export const Title = styled.h1`
   color: var(--Text-text_default, #393939);
-  text-align: center;
   font-family: Montserrat;
-  font-size: 44px;
-  font-weight: 900;
-  line-height: 54px;
-  margin: 16px 0 40px;
+  font-size: var(--text-desktop-title-4-size);
+  font-weight: var(--text-desktop-title-4--font-weight);
+  line-height: var(--text-desktop-title-4--line-height);
+  margin: 0;
 
   @media (max-width: 760px) {
-    font-size: 24px;
-    line-height: 32px;
-    margin: 8px 0 24px;
+    font-size: var(--text-mobile-title-4-size);
+    font-weight: var(--text-mobile-title-4--font-weight);
+    line-height: var(--text-mobile-title-4--line-height);
   }
 `;
 
@@ -94,37 +94,6 @@ export const PriceBox = styled.button<{ $selected: boolean }>`
   &:hover {
     border-color: var(--color-primary);
   }
-`;
-
-export const SupporterNote = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 6px;
-  margin: 12px 0 0 auto;
-  max-width: 420px;
-  color: var(--Text-text_secondary, #757575);
-  text-align: right;
-  font-family: Montserrat;
-  font-size: 13px;
-  font-weight: 500;
-  line-height: 18px;
-
-  svg {
-    width: 16px;
-    height: 16px;
-    flex-shrink: 0;
-    fill: var(--Text-text_secondary, #757575);
-  }
-`;
-
-export const Footnote = styled.div`
-  color: var(--Text-text_secondary, #757575);
-  font-family: Montserrat;
-  font-size: 12px;
-  font-weight: 500;
-  line-height: 16px;
-  margin-top: 12px;
 `;
 
 /** Payment methods stay visually locked until a trial price is chosen. */
