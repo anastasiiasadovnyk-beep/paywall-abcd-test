@@ -5,7 +5,7 @@ const TRUSTPILOT_BLACK = '#191919';
 
 export const RatingContainer = styled.div`
   display: flex;
-  align-items: baseline;
+  align-items: center;
   gap: 12px;
 `;
 
@@ -42,19 +42,18 @@ export const ScoreText = styled.span`
 `;
 
 /**
- * Official Trustpilot logo. The row aligns items by baseline (an image's
- * baseline is its bottom edge); the negative margin drops the logo so the
- * wordmark's own baseline — ~3px above the image bottom because of the
- * "p" descender — lands on the text baseline.
+ * Official Trustpilot logo. The small upward shift puts the wordmark's
+ * baseline — which sits ~14% above the image bottom because of the "p"
+ * descender — on the same line as the adjacent text.
  */
 export const TrustpilotLogo = styled.img`
   height: 24px;
   width: auto;
   flex-shrink: 0;
-  margin-bottom: -3px;
+  transform: translateY(-3px);
 
   @media (max-width: 760px) {
     height: 18px;
-    margin-bottom: -2px;
+    transform: translateY(-2px);
   }
 `;
