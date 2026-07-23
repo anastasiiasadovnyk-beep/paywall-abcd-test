@@ -152,7 +152,8 @@ export const ProgressBarRow = styled.div`
 `;
 
 export const ProgressPercent = styled.div`
-  color: ${PROGRESS_GREEN};
+  /* Same treatment as the group C progress value. */
+  color: var(--Text-text_default, #393939);
   font-family: Montserrat;
   font-size: 16px;
   font-weight: 700;

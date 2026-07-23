@@ -9,9 +9,11 @@ import { formatPlanPrice } from '@/shared/lib/price';
 import { Divider } from '@/shared/ui/divider';
 import { DocumentMock } from '@/shared/ui/documentMock';
 import { CheckIcon, NorthEastIcon } from '@/shared/ui/icons';
+import { PriceWithSup } from '@/shared/ui/priceWithSup';
 import { HeaderFlowSection } from '@/widgets/headerFlowSection';
 
-import { ContinueButton } from '../components/continueButton';
+import { CheckoutDisclaimer } from '../components/checkoutDisclaimer';
+import { PaymentMethods } from '../components/paymentMethods';
 import { SecuredPaymentNote } from '../components/securedPaymentNote';
 import { TrustBadges } from '../components/trustBadges';
 import {
@@ -30,11 +32,15 @@ import {
   PaymentCard,
   PaymentColumn,
   SideColumn,
+  TotalDuePrice,
+  TotalDueRow,
+  TotalDueTitle,
 } from './groupA.styles';
 import {
   ChoiceColumns,
   Footnote,
   IntroPanel,
+  PaymentSection,
   PriceBox,
   PriceBoxesGrid,
   SectionHeading,
@@ -44,9 +50,9 @@ import {
 
 /**
  * Group D — "choose your price" combined with the group A checkout
- * layout: the price picker sits in the payment card on the left, and
- * the right column keeps the file-ready card and the trial summary
- * whose total updates with the chosen price.
+ * layout: the price picker sits above the payment methods in the
+ * payment card; paying is unlocked once a price is chosen, and the
+ * totals update live with the selection.
  */
 export const GroupD: FC = () => {
   const [selectedChoiceId, setSelectedChoiceId] = useState<string | null>(null);
@@ -91,13 +97,25 @@ export const GroupD: FC = () => {
                   prices!
                   <NorthEastIcon />
                 </SupporterNote>
-              </div>
-
-              <div>
-                <ContinueButton disabled={!selectedChoice} />
                 <Footnote>*Cost of trial as of July 2026</Footnote>
               </div>
 
+              <TotalDueRow>
+                <TotalDueTitle>Total due today:</TotalDueTitle>
+                <TotalDuePrice data-testid="total-due-price">
+                  {selectedChoice ? (
+                    <PriceWithSup price={formatPlanPrice(selectedChoice.cents)} />
+                  ) : (
+                    '—'
+                  )}
+                </TotalDuePrice>
+              </TotalDueRow>
+
+              <PaymentSection $locked={!selectedChoice} aria-disabled={!selectedChoice}>
+                <PaymentMethods layout="stacked" cardStyle="dark" />
+              </PaymentSection>
+
+              <CheckoutDisclaimer variant="full" align="justify" />
               <TrustBadges badges={['cancel-anytime', 'support', 'users']} />
             </PaymentCard>
             <SecuredPaymentNote />

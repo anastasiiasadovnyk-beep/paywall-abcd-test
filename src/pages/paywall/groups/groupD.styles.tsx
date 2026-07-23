@@ -136,3 +136,11 @@ export const Footnote = styled.div`
   line-height: 16px;
   margin-top: 12px;
 `;
+
+/** Payment methods stay visually locked until a trial price is chosen. */
+export const PaymentSection = styled.div<{ $locked: boolean }>`
+  width: 100%;
+  opacity: ${({ $locked }) => ($locked ? 0.45 : 1)};
+  pointer-events: ${({ $locked }) => ($locked ? 'none' : 'auto')};
+  transition: opacity 0.2s ease;
+`;
