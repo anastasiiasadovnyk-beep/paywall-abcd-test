@@ -132,9 +132,13 @@ export const FileReadyCard = styled.div`
   gap: 20px;
   width: 100%;
   padding: 20px 24px;
-  border-radius: var(--radius-3);
-  border: 1px dashed var(--Borders-border_primary, var(--color-primary));
+  border-radius: var(--radius-4);
   background: var(--Background-bg_white, #fff);
+  /* Same border as the group C preview panel: thin dashed stroke with
+     long dashes (CSS dashed borders can't set dash length, so the
+     border is an SVG stroke). Color mirrors --color-primary (#4988fc);
+     rx mirrors --radius-4 (32px). */
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='32' ry='32' stroke='%234988FC' stroke-width='2' stroke-dasharray='14 10'/%3e%3c/svg%3e");
 `;
 
 export const FileReadyInfo = styled.div`

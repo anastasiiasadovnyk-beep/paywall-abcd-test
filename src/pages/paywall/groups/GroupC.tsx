@@ -14,7 +14,6 @@ import featureOrganize from '@/shared/ui/assets/features/feature-organize.svg';
 import {
   CalendarMonthIcon,
   CheckCircleIcon,
-  CheckIcon,
   LockIcon,
   VerifiedUserIcon,
 } from '@/shared/ui/icons';
@@ -34,13 +33,10 @@ import {
   FileCard,
   FileCardTitleRow,
   FileName,
-  DocumentCheckBadge,
   LeftColumn,
   PageTitle,
   PdfChip,
   PlaceholderPage,
-  PreviewPanel,
-  PreviewTitleRow,
   ProgressFill,
   ProgressPercent,
   ProgressRow,
@@ -87,6 +83,8 @@ export const GroupC: FC = () => {
                 <CheckCircleIcon />
                 Your file is almost ready!
               </FileCardTitleRow>
+              <PdfChip>PDF</PdfChip>
+              <PlaceholderPage />
               <FileName>{CHECKOUT_FILE.compressedFileName}</FileName>
               <ProgressRow>
                 <ProgressTrack>
@@ -95,17 +93,6 @@ export const GroupC: FC = () => {
                 <ProgressPercent>{CHECKOUT_FILE.progressPercentC}%</ProgressPercent>
               </ProgressRow>
             </FileCard>
-
-            <PreviewPanel>
-              <PreviewTitleRow>
-                <DocumentCheckBadge>
-                  <CheckIcon />
-                </DocumentCheckBadge>
-                Your document is ready!
-              </PreviewTitleRow>
-              <PdfChip>PDF</PdfChip>
-              <PlaceholderPage />
-            </PreviewPanel>
 
             <TimelineList>
               {TRIAL_TIMELINE.map((item) => {

@@ -80,9 +80,10 @@ export const RightColumn = styled.div`
 export const FileCard = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  align-items: center;
+  gap: 16px;
   width: 100%;
-  padding: 20px 24px;
+  padding: 28px 24px;
   border-radius: var(--radius-3);
   /* Same card treatment as the group B download panel. */
   background: var(--Background-bg_white, #fff);
@@ -108,7 +109,9 @@ export const FileCardTitleRow = styled.div`
 `;
 
 export const FileName = styled.div`
-  color: var(--Text-text_primary, var(--color-primary));
+  color: var(--Text-text_default, #393939);
+  text-align: center;
+  max-width: 100%;
   font-family: Montserrat;
   font-size: 14px;
   font-weight: 500;
@@ -151,54 +154,6 @@ export const ProgressPercent = styled.div`
   flex-shrink: 0;
 `;
 
-export const PreviewPanel = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 40px;
-  width: 100%;
-  padding: 48px 24px 52px;
-  border-radius: var(--radius-4);
-  background: var(--Background-bg_white, #fff);
-  /* Thin dashed border with long strokes (CSS dashed borders can't set
-     dash length, so the border is an SVG stroke). Color mirrors
-     --color-primary (#4988fc); rx mirrors --radius-4 (32px). */
-  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='32' ry='32' stroke='%234988FC' stroke-width='2' stroke-dasharray='14 10'/%3e%3c/svg%3e");
-
-  @media (max-width: 760px) {
-    gap: 28px;
-    padding: 32px 16px 40px;
-  }
-`;
-
-export const PreviewTitleRow = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  color: var(--Text-text_default, #393939);
-  font-family: Montserrat;
-  font-size: 22px;
-  font-weight: 600;
-  line-height: 28px;
-`;
-
-export const DocumentCheckBadge = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 28px;
-  height: 28px;
-  border-radius: var(--radius-1);
-  background: #20c55b;
-  flex-shrink: 0;
-
-  svg {
-    width: 18px;
-    height: 18px;
-    fill: var(--color-common-white, #fff);
-  }
-`;
-
 export const PdfChip = styled.span`
   display: inline-flex;
   align-items: center;
@@ -211,14 +166,10 @@ export const PdfChip = styled.span`
   font-family: Montserrat;
   font-size: 18px;
   font-weight: 700;
-  /* Half-overlaps the top edge of the page below (panel gap + 18px). */
-  margin-bottom: -58px;
+  /* Half-overlaps the top edge of the page below (card gap + 18px). */
+  margin-bottom: -34px;
   position: relative;
   z-index: 1;
-
-  @media (max-width: 760px) {
-    margin-bottom: -46px;
-  }
 `;
 
 /** Full A4 page sized per the reference mockup. */

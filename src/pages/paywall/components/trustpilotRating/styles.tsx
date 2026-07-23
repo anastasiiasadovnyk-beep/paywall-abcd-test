@@ -41,13 +41,13 @@ export const ScoreText = styled.span`
   }
 `;
 
-/** Official Trustpilot logo, matched to the height of the adjacent text. */
+/** Official Trustpilot logo. */
 export const TrustpilotLogo = styled.img`
-  height: 18px;
+  height: 24px;
   width: auto;
   flex-shrink: 0;
 
   @media (max-width: 760px) {
-    height: 14px;
+    height: 18px;
   }
 `;
