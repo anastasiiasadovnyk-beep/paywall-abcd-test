@@ -1,5 +1,14 @@
 import styled from 'styled-components';
 
+import { IncludesCard } from './groupA.styles';
+
+/** Group D shows the trial summary flat on the page, without card chrome. */
+export const PlainIncludesCard = styled(IncludesCard)`
+  background: transparent;
+  box-shadow: none;
+  padding: 0;
+`;
+
 export const Title = styled.h1`
   color: var(--Text-text_default, #393939);
   text-align: center;
@@ -34,49 +43,30 @@ export const ChoiceColumns = styled.div`
   }
 `;
 
-export const IntroPanel = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  padding: 20px 24px;
-  border-radius: var(--radius-2);
-  background: var(--color-bg-light-grey, #f5f5f7);
-  color: var(--Text-text_default, #393939);
-  font-family: Montserrat;
-  font-size: 16px;
-  font-weight: 500;
-  line-height: 24px;
-
-  p {
-    margin: 0;
-  }
-
-  b {
-    font-weight: 700;
-  }
-
-  @media (max-width: 760px) {
-    padding: 16px;
-    font-size: 14px;
-    line-height: 20px;
-  }
+/** Sizing context so the price grid responds to the card's own width. */
+export const PriceSection = styled.div`
+  width: 100%;
+  container-type: inline-size;
 `;
 
-export const SectionHeading = styled.h2`
-  color: var(--Text-text_default, #393939);
-  font-family: Montserrat;
-  font-size: 20px;
-  font-weight: 700;
-  line-height: 26px;
-  margin: 0;
-`;
-
+/**
+ * Always evenly sized buttons: four across while each stays at least
+ * 112px wide (4 × 112px + 3 × 12px gaps = 484px), otherwise 2×2, and a
+ * single column on the narrowest cards.
+ */
 export const PriceBoxesGrid = styled.div`
   display: grid;
-  /* Four across when there is room, wrapping to 2×2 on tight widths. */
-  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 12px;
   width: 100%;
+
+  @container (max-width: 483px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @container (max-width: 235px) {
+    grid-template-columns: minmax(0, 1fr);
+  }
 `;
 
 export const PriceBox = styled.button<{ $selected: boolean }>`

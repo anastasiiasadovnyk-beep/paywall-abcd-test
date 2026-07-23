@@ -23,7 +23,6 @@ import {
   FileReadyInfo,
   FileReadyThumbnail,
   FileReadyTitle,
-  IncludesCard,
   IncludesItem,
   IncludesList,
   IncludesTitle,
@@ -35,11 +34,11 @@ import {
 import {
   ChoiceColumns,
   Footnote,
-  IntroPanel,
   PaymentSection,
+  PlainIncludesCard,
   PriceBox,
   PriceBoxesGrid,
-  SectionHeading,
+  PriceSection,
   SupporterNote,
   Title,
 } from './groupD.styles';
@@ -63,17 +62,7 @@ export const GroupD: FC = () => {
         <ChoiceColumns>
           <PaymentColumn>
             <PaymentCard>
-              <IntroPanel>
-                <p>Money shouldn’t stand in the way of getting your file done.</p>
-                <p>
-                  <b>It costs us approximately $10* to offer a 7-day trial.</b> Please pick an
-                  amount that’s reasonable for you.
-                </p>
-              </IntroPanel>
-
-              <SectionHeading>Pick your trial price — the access is the same</SectionHeading>
-
-              <div>
+              <PriceSection>
                 <PriceBoxesGrid>
                   {PRICE_CHOICES.map((choice) => (
                     <PriceBox
@@ -94,7 +83,7 @@ export const GroupD: FC = () => {
                   <NorthEastIcon />
                 </SupporterNote>
                 <Footnote>*Cost of trial as of July 2026</Footnote>
-              </div>
+              </PriceSection>
 
               <PaymentSection $locked={!selectedChoice} aria-disabled={!selectedChoice}>
                 <PaymentMethods layout="stacked" cardStyle="dark" />
@@ -120,7 +109,7 @@ export const GroupD: FC = () => {
               </FileReadyThumbnail>
             </FileReadyCard>
 
-            <IncludesCard data-testid="trial-includes-card">
+            <PlainIncludesCard data-testid="trial-includes-card">
               <IncludesTitle>Your 7-day trial includes:</IncludesTitle>
               <IncludesList>
                 {TRIAL_INCLUDES.map((item) => (
@@ -137,7 +126,7 @@ export const GroupD: FC = () => {
                   {selectedChoice ? formatPlanPrice(selectedChoice.cents) : '—'}
                 </b>
               </IncludesTotalRow>
-            </IncludesCard>
+            </PlainIncludesCard>
           </SideColumn>
         </ChoiceColumns>
       </Content>
