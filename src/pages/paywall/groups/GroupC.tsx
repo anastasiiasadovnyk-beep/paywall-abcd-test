@@ -123,7 +123,7 @@ export const GroupC: FC = () => {
 
             <PaymentMethods layout="stacked" cardStyle="light" />
 
-            <CheckoutDisclaimer variant="full" align="justify" />
+            <CheckoutDisclaimer variant="full" />
 
             <UnlockTitle>Everything unlocks the moment you start</UnlockTitle>
             <FeatureGrid>

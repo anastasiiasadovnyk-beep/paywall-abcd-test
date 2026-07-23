@@ -80,7 +80,7 @@ export const GroupD: FC = () => {
                 <PaymentMethods layout="stacked" cardStyle="dark" />
               </PaymentSection>
 
-              <CheckoutDisclaimer variant="full" align="justify" />
+              <CheckoutDisclaimer variant="full" />
               <TrustBadges badges={['cancel-anytime', 'support', 'users']} />
             </PaymentCard>
             <SecuredPaymentNote />

@@ -52,7 +52,7 @@ export const GroupA: FC = () => {
                 </TotalDuePrice>
               </TotalDueRow>
               <PaymentMethods layout="stacked" cardStyle="dark" />
-              <CheckoutDisclaimer variant="full" align="justify" />
+              <CheckoutDisclaimer variant="full" />
               <TrustBadges badges={['cancel-anytime', 'support', 'users']} />
             </PaymentCard>
             <SecuredPaymentNote />

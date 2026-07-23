@@ -9,6 +9,7 @@ export const DocumentPlaceholder = styled.div`
   width: 100%;
   aspect-ratio: 1 / 1.414;
   background: var(--Background-bg_white, #fff);
-  border-radius: var(--radius-1);
-  border: 1px solid var(--color-outline-border, #cdd5df);
+  /* Same stroke and corners as the feature cards. */
+  border-radius: var(--radius-2);
+  border: 1px solid var(--color-divider);
 `;

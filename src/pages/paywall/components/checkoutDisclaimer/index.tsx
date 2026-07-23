@@ -9,7 +9,7 @@ import { DisclaimerRoot } from './styles';
 interface ICheckoutDisclaimerProps {
   /** 'full' — group A/C paragraph; 'short' — condensed group B paragraph. */
   variant?: 'full' | 'short';
-  align?: 'justify' | 'left' | 'center';
+  align?: 'left' | 'center';
 }
 
 /**
@@ -18,7 +18,7 @@ interface ICheckoutDisclaimerProps {
  */
 export const CheckoutDisclaimer: FC<ICheckoutDisclaimerProps> = ({
   variant = 'full',
-  align = 'justify',
+  align = 'left',
 }) => {
   const recurringPrice = formatPlanPrice(CHECKOUT.recurringPriceCents);
 
