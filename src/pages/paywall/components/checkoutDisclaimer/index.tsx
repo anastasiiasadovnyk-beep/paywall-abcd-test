@@ -47,11 +47,20 @@ export const CheckoutDisclaimer: FC<ICheckoutDisclaimerProps> = ({
   return (
     <DisclaimerRoot $align={align} data-testid="checkout-disclaimer">
       By continuing you agree that after the end of 7-day trial you will be automatically charged{' '}
-      <b>{recurringPrice} every 4-weeks</b> unless you cancel before your trial ends. You can
-      cancel auto-renewing charges through your online account, by emailing{' '}
-      <b>{CHECKOUT.supportEmail}</b>, or calling <b>{CHECKOUT.supportPhone}</b> before your next
-      monthly renewal date. Prices may change. See our {subscriptionPolicyLink} and{' '}
-      {refundPolicyLink} for full details.
+      <a data-testid="recurring-price-link" href={PAGE_LINKS.SUBSCRIPTION_TERMS}>
+        {recurringPrice} every 4-weeks
+      </a>{' '}
+      unless you cancel before your trial ends. You can cancel auto-renewing charges through your
+      online account, by emailing{' '}
+      <a data-testid="support-email-link" href={`mailto:${CHECKOUT.supportEmail}`}>
+        {CHECKOUT.supportEmail}
+      </a>
+      , or calling{' '}
+      <a data-testid="support-phone-link" href={`tel:${CHECKOUT.supportPhone.replace(/[^+\d]/g, '')}`}>
+        {CHECKOUT.supportPhone}
+      </a>{' '}
+      before your next monthly renewal date. Prices may change. See our {subscriptionPolicyLink}{' '}
+      and {refundPolicyLink} for full details.
     </DisclaimerRoot>
   );
 };

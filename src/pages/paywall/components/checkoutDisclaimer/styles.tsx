@@ -9,10 +9,6 @@ export const DisclaimerRoot = styled.p<{ $align: 'left' | 'center' }>`
   text-align: ${({ $align }) => $align};
   margin: 0;
 
-  b {
-    font-weight: 700;
-  }
-
   /* Links match the surrounding secondary text; only the underline
      sets them apart. */
   a {
