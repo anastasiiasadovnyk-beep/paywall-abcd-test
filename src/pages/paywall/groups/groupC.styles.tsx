@@ -154,8 +154,11 @@ export const PreviewPanel = styled.div`
   width: 100%;
   padding: 48px 24px 52px;
   border-radius: var(--radius-4);
-  border: 2px dashed var(--Borders-border_primary, var(--color-primary));
   background: var(--Background-bg_white, #fff);
+  /* Thin dashed border with long strokes (CSS dashed borders can't set
+     dash length, so the border is an SVG stroke). Color mirrors
+     --color-primary (#4988fc); rx mirrors --radius-4 (32px). */
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='32' ry='32' stroke='%234988FC' stroke-width='2' stroke-dasharray='14 10'/%3e%3c/svg%3e");
 
   @media (max-width: 760px) {
     gap: 28px;
