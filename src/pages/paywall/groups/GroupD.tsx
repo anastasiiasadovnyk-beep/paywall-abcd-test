@@ -77,7 +77,7 @@ export const GroupD: FC = () => {
               </PriceSection>
 
               <PaymentSection $locked={!selectedChoice} aria-disabled={!selectedChoice}>
-                <PaymentMethods layout="stacked" cardStyle="dark" />
+                <PaymentMethods layout="stacked" />
               </PaymentSection>
 
               <CheckoutDisclaimer variant="full" />

@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-import type { TCardButtonStyle, TPaymentMethodsLayout } from './index';
+import type { TPaymentMethodsLayout } from './index';
 
 const buttonBase = css`
   display: flex;
@@ -52,15 +52,12 @@ export const BrandLogo = styled.img`
   height: 26px;
 `;
 
-export const CardButton = styled.button<{ $cardStyle: TCardButtonStyle }>`
+export const CardButton = styled.button`
   ${buttonBase}
   justify-content: space-between;
   gap: 16px;
-  background: ${({ $cardStyle }) => ($cardStyle === 'dark' ? '#61656c' : '#fff')};
-  color: ${({ $cardStyle }) =>
-    $cardStyle === 'dark' ? 'var(--color-common-white, #fff)' : 'var(--Text-text_default, #393939)'};
-  border: ${({ $cardStyle }) =>
-    $cardStyle === 'dark' ? 'none' : '1px solid var(--color-divider)'};
+  background: #61656c;
+  color: var(--color-common-white, #fff);
 `;
 
 export const CardLabel = styled.span`

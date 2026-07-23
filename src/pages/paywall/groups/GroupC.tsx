@@ -121,7 +121,7 @@ export const GroupC: FC = () => {
               <TotalDuePrice data-testid="total-due-price">{trialPrice}</TotalDuePrice>
             </TotalDueRow>
 
-            <PaymentMethods layout="stacked" cardStyle="light" />
+            <PaymentMethods layout="stacked" />
 
             <CheckoutDisclaimer variant="full" />
 

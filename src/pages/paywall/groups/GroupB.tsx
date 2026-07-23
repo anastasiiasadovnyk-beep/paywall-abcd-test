@@ -83,7 +83,7 @@ export const GroupB: FC = () => {
           <TotalDuePrice data-testid="total-due-price">{trialPrice}</TotalDuePrice>
         </TotalDueRow>
 
-        <PaymentMethods layout="grid" cardStyle="dark" />
+        <PaymentMethods layout="grid" />
 
         <TrialCaption>
           <span>7-day trial for {trialPrice}</span>

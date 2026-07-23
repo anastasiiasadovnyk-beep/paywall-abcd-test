@@ -51,7 +51,7 @@ export const GroupA: FC = () => {
                   <PriceWithSup price={trialPrice} />
                 </TotalDuePrice>
               </TotalDueRow>
-              <PaymentMethods layout="stacked" cardStyle="dark" />
+              <PaymentMethods layout="stacked" />
               <CheckoutDisclaimer variant="full" />
               <TrustBadges badges={['cancel-anytime', 'support', 'users']} />
             </PaymentCard>
