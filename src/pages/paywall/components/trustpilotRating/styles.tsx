@@ -2,7 +2,6 @@ import styled from 'styled-components';
 
 /* Official Trustpilot widget palette. */
 const TRUSTPILOT_GREEN = '#00b67a';
-const TRUSTPILOT_GREY = '#dcdce6';
 const TRUSTPILOT_BLACK = '#191919';
 
 export const RatingContainer = styled.div`
@@ -11,55 +10,34 @@ export const RatingContainer = styled.div`
   gap: 12px;
 `;
 
-export const StarTiles = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 3px;
-`;
-
-export const StarTile = styled.div<{ $fill: number }>`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 24px;
-  height: 24px;
-  background: ${({ $fill }) => {
-    if ($fill >= 1) return TRUSTPILOT_GREEN;
-    if ($fill <= 0) return TRUSTPILOT_GREY;
-
-    return `linear-gradient(90deg, ${TRUSTPILOT_GREEN} ${$fill * 100}%, ${TRUSTPILOT_GREY} ${
-      $fill * 100
-    }%)`;
-  }};
-
-  svg {
-    width: 17px;
-    height: 17px;
-    fill: #fff;
-    flex-shrink: 0;
-  }
+export const ExcellentText = styled.span`
+  color: ${TRUSTPILOT_BLACK};
+  font-family: Montserrat;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 24px;
+  white-space: nowrap;
 
   @media (max-width: 760px) {
-    width: 18px;
-    height: 18px;
-
-    svg {
-      width: 13px;
-      height: 13px;
-    }
+    font-size: 14px;
+    line-height: 18px;
   }
 `;
 
 export const ScoreText = styled.span`
   color: ${TRUSTPILOT_BLACK};
   font-family: Montserrat;
-  font-size: 16px;
-  font-weight: 600;
-  line-height: 22px;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 24px;
   white-space: nowrap;
 
+  b {
+    font-weight: 600;
+  }
+
   @media (max-width: 760px) {
-    font-size: 13px;
+    font-size: 14px;
     line-height: 18px;
   }
 `;
@@ -70,25 +48,25 @@ export const BrandMark = styled.span`
   gap: 4px;
   color: ${TRUSTPILOT_BLACK};
   font-family: Montserrat;
-  font-size: 16px;
-  font-weight: 800;
-  line-height: 22px;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 24px;
   white-space: nowrap;
 
   svg {
-    width: 20px;
-    height: 20px;
+    width: 22px;
+    height: 22px;
     fill: ${TRUSTPILOT_GREEN};
     flex-shrink: 0;
   }
 
   @media (max-width: 760px) {
-    font-size: 13px;
+    font-size: 14px;
     line-height: 18px;
 
     svg {
-      width: 16px;
-      height: 16px;
+      width: 17px;
+      height: 17px;
     }
   }
 `;

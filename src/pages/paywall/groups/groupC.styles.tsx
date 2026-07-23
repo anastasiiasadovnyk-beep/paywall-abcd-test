@@ -82,7 +82,9 @@ export const FileCard = styled.div`
   width: 100%;
   padding: 20px 24px;
   border-radius: var(--radius-3);
-  background: var(--color-state-primary-hover, rgba(73, 136, 252, 0.08));
+  /* Same card treatment as the group B download panel. */
+  background: var(--Background-bg_white, #fff);
+  box-shadow: 0 8px 32px 0 rgba(17, 24, 40, 0.08);
 `;
 
 export const FileCardTitleRow = styled.div`
@@ -126,7 +128,8 @@ export const ProgressTrack = styled.div`
   flex: 1;
   height: 8px;
   border-radius: var(--radius-8);
-  background: var(--Background-bg_white, #fff);
+  /* Light-grey track so it stays visible on the white card. */
+  background: var(--color-bg-light-grey, #f5f5f7);
   overflow: hidden;
 `;
 

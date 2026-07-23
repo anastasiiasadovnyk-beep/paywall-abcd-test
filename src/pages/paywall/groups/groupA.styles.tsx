@@ -170,6 +170,10 @@ export const FilePdfSuffix = styled.span`
 
 export const FileReadyThumbnail = styled.div`
   width: 200px;
+  /* The mock page is A4-proportioned; crop it to keep the card compact. */
+  max-height: 150px;
+  overflow: hidden;
+  border-radius: var(--radius-1);
   flex-shrink: 0;
 
   @media (max-width: 1024px) {

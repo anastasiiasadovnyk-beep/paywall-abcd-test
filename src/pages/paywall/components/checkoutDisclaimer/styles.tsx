@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const DisclaimerRoot = styled.p<{ $align: 'justify' | 'left' }>`
+export const DisclaimerRoot = styled.p<{ $align: 'justify' | 'left' | 'center' }>`
   color: var(--Text-text_secondary, #757575);
   font-family: Montserrat;
   font-size: 14px;

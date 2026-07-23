@@ -1,13 +1,38 @@
 import { type FC, useState } from 'react';
 
-import { PRICE_CHOICES } from '@/shared/constants/checkout';
-import { NorthEastIcon } from '@/shared/ui/icons';
+import {
+  CHECKOUT_FILE,
+  PRICE_CHOICES,
+  TRIAL_INCLUDES,
+} from '@/shared/constants/checkout';
+import { formatPlanPrice } from '@/shared/lib/price';
+import { Divider } from '@/shared/ui/divider';
+import { DocumentMock } from '@/shared/ui/documentMock';
+import { CheckIcon, NorthEastIcon } from '@/shared/ui/icons';
 import { HeaderFlowSection } from '@/widgets/headerFlowSection';
 
 import { ContinueButton } from '../components/continueButton';
+import { SecuredPaymentNote } from '../components/securedPaymentNote';
+import { TrustBadges } from '../components/trustBadges';
 import {
-  ChoiceCard,
   Content,
+  FileName,
+  FilePdfSuffix,
+  FileReadyCard,
+  FileReadyInfo,
+  FileReadyThumbnail,
+  FileReadyTitle,
+  IncludesCard,
+  IncludesItem,
+  IncludesList,
+  IncludesTitle,
+  IncludesTotalRow,
+  PaymentCard,
+  PaymentColumn,
+  SideColumn,
+} from './groupA.styles';
+import {
+  ChoiceColumns,
   Footnote,
   IntroPanel,
   PriceBox,
@@ -18,11 +43,14 @@ import {
 } from './groupD.styles';
 
 /**
- * Group D — "choose your price": the visitor picks what the 7-day trial
- * costs; every option unlocks the same full access.
+ * Group D — "choose your price" combined with the group A checkout
+ * layout: the price picker sits in the payment card on the left, and
+ * the right column keeps the file-ready card and the trial summary
+ * whose total updates with the chosen price.
  */
 export const GroupD: FC = () => {
   const [selectedChoiceId, setSelectedChoiceId] = useState<string | null>(null);
+  const selectedChoice = PRICE_CHOICES.find((choice) => choice.id === selectedChoiceId) ?? null;
 
   return (
     <>
@@ -30,40 +58,85 @@ export const GroupD: FC = () => {
       <Content>
         <Title>Choose a price for your 7-day trial</Title>
 
-        <ChoiceCard>
-          <IntroPanel>
-            <p>Money shouldn’t stand in the way of getting your file done.</p>
-            <p>
-              <b>It costs us approximately $10* to offer a 7-day trial.</b> Please pick an amount
-              that’s reasonable for you.
-            </p>
-          </IntroPanel>
+        <ChoiceColumns>
+          <PaymentColumn>
+            <PaymentCard>
+              <IntroPanel>
+                <p>Money shouldn’t stand in the way of getting your file done.</p>
+                <p>
+                  <b>It costs us approximately $10* to offer a 7-day trial.</b> Please pick an
+                  amount that’s reasonable for you.
+                </p>
+              </IntroPanel>
 
-          <SectionHeading>Pick your trial price — the access is the same</SectionHeading>
+              <SectionHeading>Pick your trial price — the access is the same</SectionHeading>
 
-          <PriceBoxesGrid>
-            {PRICE_CHOICES.map((choice) => (
-              <PriceBox
-                key={choice.id}
-                type="button"
-                $selected={selectedChoiceId === choice.id}
-                data-testid="price-choice"
-                onClick={() => setSelectedChoiceId(choice.id)}
-              >
-                {choice.label}
-              </PriceBox>
-            ))}
-          </PriceBoxesGrid>
+              <div>
+                <PriceBoxesGrid>
+                  {PRICE_CHOICES.map((choice) => (
+                    <PriceBox
+                      key={choice.id}
+                      type="button"
+                      aria-pressed={selectedChoiceId === choice.id}
+                      $selected={selectedChoiceId === choice.id}
+                      data-testid="price-choice"
+                      onClick={() => setSelectedChoiceId(choice.id)}
+                    >
+                      {choice.label}
+                    </PriceBox>
+                  ))}
+                </PriceBoxesGrid>
+                <SupporterNote>
+                  This option will help us support those who need to select the lowest trial
+                  prices!
+                  <NorthEastIcon />
+                </SupporterNote>
+              </div>
 
-          <SupporterNote>
-            This option will help us support those who need to select the lowest trial prices!
-            <NorthEastIcon />
-          </SupporterNote>
+              <div>
+                <ContinueButton disabled={!selectedChoice} />
+                <Footnote>*Cost of trial as of July 2026</Footnote>
+              </div>
 
-          <ContinueButton disabled={!selectedChoiceId} />
+              <TrustBadges badges={['cancel-anytime', 'support', 'users']} />
+            </PaymentCard>
+            <SecuredPaymentNote />
+          </PaymentColumn>
 
-          <Footnote>*Cost of trial as of July 2026</Footnote>
-        </ChoiceCard>
+          <SideColumn>
+            <FileReadyCard data-testid="file-ready-card">
+              <FileReadyInfo>
+                <FileReadyTitle>Your file is ready!</FileReadyTitle>
+                <FileName>
+                  {CHECKOUT_FILE.longFileName.replace('.pdf', '')}
+                  <FilePdfSuffix>pdf</FilePdfSuffix>
+                </FileName>
+              </FileReadyInfo>
+              <FileReadyThumbnail>
+                <DocumentMock />
+              </FileReadyThumbnail>
+            </FileReadyCard>
+
+            <IncludesCard data-testid="trial-includes-card">
+              <IncludesTitle>Your 7-day trial includes:</IncludesTitle>
+              <IncludesList>
+                {TRIAL_INCLUDES.map((item) => (
+                  <IncludesItem key={item.text} $bold={item.isBold}>
+                    <CheckIcon />
+                    {item.text}
+                  </IncludesItem>
+                ))}
+              </IncludesList>
+              <Divider />
+              <IncludesTotalRow>
+                <span>Total due today:</span>
+                <b data-testid="includes-total-price">
+                  {selectedChoice ? formatPlanPrice(selectedChoice.cents) : '—'}
+                </b>
+              </IncludesTotalRow>
+            </IncludesCard>
+          </SideColumn>
+        </ChoiceColumns>
       </Content>
     </>
   );

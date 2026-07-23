@@ -9,7 +9,7 @@ import { DisclaimerRoot } from './styles';
 interface ICheckoutDisclaimerProps {
   /** 'full' — group A/C paragraph; 'short' — condensed group B paragraph. */
   variant?: 'full' | 'short';
-  align?: 'justify' | 'left';
+  align?: 'justify' | 'left' | 'center';
 }
 
 /**

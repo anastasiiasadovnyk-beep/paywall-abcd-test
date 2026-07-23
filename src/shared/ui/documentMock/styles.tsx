@@ -3,10 +3,14 @@ import styled from 'styled-components';
 export const DocPage = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  justify-content: space-between;
+  gap: 8px;
+  width: 100%;
+  /* A4 portrait — same proportions as the group C document placeholder. */
+  aspect-ratio: 1 / 1.414;
   background: var(--Background-bg_white, #fff);
   border-radius: var(--radius-1);
-  padding: 16px 14px;
+  padding: 12px;
   box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.08);
   overflow: hidden;
 `;
@@ -21,7 +25,7 @@ export const DocTitleLine = styled.div`
 export const DocLines = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
   width: 100%;
 `;
 

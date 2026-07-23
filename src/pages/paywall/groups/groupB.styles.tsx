@@ -128,6 +128,9 @@ export const PdfChip = styled.span`
 `;
 
 export const FileMeta = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
   color: var(--Text-text_secondary, #757575);
   font-family: Montserrat;
   font-size: 16px;
@@ -137,6 +140,7 @@ export const FileMeta = styled.div`
   @media (max-width: 760px) {
     font-size: 13px;
     line-height: 18px;
+    gap: 8px;
   }
 `;
 

@@ -56,7 +56,11 @@ export const GroupB: FC = () => {
                 <PdfChip>PDF</PdfChip>
                 {CHECKOUT_FILE.longFileName}
               </FileNameRow>
-              <FileMeta>{CHECKOUT_FILE.sizeLabel} · converted &amp; ready</FileMeta>
+              <FileMeta>
+                <span>{CHECKOUT_FILE.sizeLabel}</span>
+                <Divider $orientation="vertical" $length="12px" />
+                <span>Converted &amp; ready</span>
+              </FileMeta>
             </FileDetails>
           </FileRow>
           <ProgressBarRow>
@@ -84,13 +88,13 @@ export const GroupB: FC = () => {
         <TrialCaption>
           <span>7-day trial for {trialPrice}</span>
           <Divider $orientation="vertical" $length="14px" />
-          <span>then {recurringPrice} every 4 weeks</span>
+          <span>Then {recurringPrice} every 4 weeks</span>
           <Divider $orientation="vertical" $length="14px" />
-          <span>cancel anytime</span>
+          <span>Cancel anytime</span>
         </TrialCaption>
 
         <DisclaimerContainer>
-          <CheckoutDisclaimer variant="short" align="left" />
+          <CheckoutDisclaimer variant="short" align="center" />
         </DisclaimerContainer>
 
         <SecuredPaymentNote />
