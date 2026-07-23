@@ -19,7 +19,6 @@ import {
   Content,
   FileName,
   FilePdfSuffix,
-  FileReadyCard,
   FileReadyInfo,
   FileReadyThumbnail,
   FileReadyTitle,
@@ -28,11 +27,12 @@ import {
   IncludesTitle,
   IncludesTotalRow,
   PaymentCard,
-  PaymentColumn,
-  SideColumn,
 } from './groupA.styles';
 import {
   ChoiceColumns,
+  ChoiceFileReadyCard,
+  ChoicePaymentColumn,
+  ChoiceSideColumn,
   PaymentSection,
   PlainIncludesCard,
   PriceBox,
@@ -56,7 +56,7 @@ export const GroupD: FC = () => {
       <HeaderFlowSection />
       <Content>
         <ChoiceColumns>
-          <PaymentColumn>
+          <ChoicePaymentColumn>
             <PaymentCard>
               <Title>Choose a price for your 7-day trial</Title>
               <PriceSection>
@@ -84,10 +84,10 @@ export const GroupD: FC = () => {
               <TrustBadges badges={['cancel-anytime', 'support', 'users']} />
             </PaymentCard>
             <SecuredPaymentNote />
-          </PaymentColumn>
+          </ChoicePaymentColumn>
 
-          <SideColumn>
-            <FileReadyCard data-testid="file-ready-card">
+          <ChoiceSideColumn>
+            <ChoiceFileReadyCard data-testid="file-ready-card">
               <FileReadyInfo>
                 <FileReadyTitle>Your file is ready!</FileReadyTitle>
                 <FileName>
@@ -98,7 +98,7 @@ export const GroupD: FC = () => {
               <FileReadyThumbnail>
                 <DocumentPlaceholder />
               </FileReadyThumbnail>
-            </FileReadyCard>
+            </ChoiceFileReadyCard>
 
             <PlainIncludesCard data-testid="trial-includes-card">
               <IncludesTitle>Your 7-day trial includes:</IncludesTitle>
@@ -118,7 +118,7 @@ export const GroupD: FC = () => {
                 </b>
               </IncludesTotalRow>
             </PlainIncludesCard>
-          </SideColumn>
+          </ChoiceSideColumn>
         </ChoiceColumns>
       </Content>
     </>

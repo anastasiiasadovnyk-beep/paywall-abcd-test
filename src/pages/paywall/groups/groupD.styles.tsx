@@ -1,6 +1,11 @@
 import styled from 'styled-components';
 
-import { IncludesCard } from './groupA.styles';
+import {
+  FileReadyCard,
+  IncludesCard,
+  PaymentColumn,
+  SideColumn,
+} from './groupA.styles';
 
 /** Group D shows the trial summary flat on the page, without card chrome. */
 export const PlainIncludesCard = styled(IncludesCard)`
@@ -22,6 +27,30 @@ export const Title = styled.h1`
     font-size: var(--text-mobile-title-4-size);
     font-weight: var(--text-mobile-title-4--font-weight);
     line-height: var(--text-mobile-title-4--line-height);
+  }
+`;
+
+/**
+ * On mobile the two columns dissolve (display: contents) so their
+ * blocks become direct flex items of ChoiceColumns and can be
+ * reordered independently of the desktop column structure.
+ */
+export const ChoicePaymentColumn = styled(PaymentColumn)`
+  @media (max-width: 760px) {
+    display: contents;
+  }
+`;
+
+export const ChoiceSideColumn = styled(SideColumn)`
+  @media (max-width: 760px) {
+    display: contents;
+  }
+`;
+
+/** The file card jumps above the price picker on mobile. */
+export const ChoiceFileReadyCard = styled(FileReadyCard)`
+  @media (max-width: 760px) {
+    order: -1;
   }
 `;
 
