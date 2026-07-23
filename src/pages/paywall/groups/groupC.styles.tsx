@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import { DocumentPlaceholder } from '@/shared/ui/documentPlaceholder';
+
 /* PDFLeader's success green (also used by the main app's file preview). */
 const PROGRESS_GREEN = '#20c55b';
 
@@ -219,17 +221,9 @@ export const PdfChip = styled.span`
   }
 `;
 
-/**
- * Placeholder for the visitor's processed document (the production
- * funnel renders the real file preview here) — a full A4 page sized
- * and shadowed per the reference mockup.
- */
-export const PlaceholderPage = styled.div`
+/** Full A4 page sized per the reference mockup. */
+export const PlaceholderPage = styled(DocumentPlaceholder)`
   width: 57%;
-  aspect-ratio: 1 / 1.414;
-  background: var(--Background-bg_white, #fff);
-  border-radius: var(--radius-2);
-  box-shadow: 0 4px 32px 0 rgba(17, 24, 40, 0.12);
   flex-shrink: 0;
 `;
 

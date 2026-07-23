@@ -169,19 +169,16 @@ export const FilePdfSuffix = styled.span`
 `;
 
 export const FileReadyThumbnail = styled.div`
-  width: 200px;
-  /* The mock page is A4-proportioned; crop it to keep the card compact. */
-  max-height: 150px;
-  overflow: hidden;
-  border-radius: var(--radius-1);
+  /* Small full A4 page — sized so the card stays compact. */
+  width: 120px;
   flex-shrink: 0;
 
   @media (max-width: 1024px) {
-    width: 148px;
+    width: 104px;
   }
 
   @media (max-width: 760px) {
-    width: 120px;
+    width: 96px;
   }
 `;
 

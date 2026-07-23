@@ -3,7 +3,7 @@ import type { FC } from 'react';
 import { CHECKOUT, CHECKOUT_FILE, TRIAL_INCLUDES } from '@/shared/constants/checkout';
 import { formatPlanPrice } from '@/shared/lib/price';
 import { Divider } from '@/shared/ui/divider';
-import { DocumentMock } from '@/shared/ui/documentMock';
+import { DocumentPlaceholder } from '@/shared/ui/documentPlaceholder';
 import { CheckIcon } from '@/shared/ui/icons';
 import { PriceWithSup } from '@/shared/ui/priceWithSup';
 import { HeaderFlowSection } from '@/widgets/headerFlowSection';
@@ -68,7 +68,7 @@ export const GroupA: FC = () => {
                 </FileName>
               </FileReadyInfo>
               <FileReadyThumbnail>
-                <DocumentMock />
+                <DocumentPlaceholder />
               </FileReadyThumbnail>
             </FileReadyCard>
 

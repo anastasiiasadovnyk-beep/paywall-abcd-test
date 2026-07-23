@@ -7,7 +7,7 @@ import {
 } from '@/shared/constants/checkout';
 import { formatPlanPrice } from '@/shared/lib/price';
 import { Divider } from '@/shared/ui/divider';
-import { DocumentMock } from '@/shared/ui/documentMock';
+import { DocumentPlaceholder } from '@/shared/ui/documentPlaceholder';
 import { CheckIcon, NorthEastIcon } from '@/shared/ui/icons';
 import { HeaderFlowSection } from '@/widgets/headerFlowSection';
 
@@ -105,7 +105,7 @@ export const GroupD: FC = () => {
                 </FileName>
               </FileReadyInfo>
               <FileReadyThumbnail>
-                <DocumentMock />
+                <DocumentPlaceholder />
               </FileReadyThumbnail>
             </FileReadyCard>
 

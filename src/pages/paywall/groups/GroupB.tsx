@@ -3,7 +3,7 @@ import type { FC } from 'react';
 import { CHECKOUT, CHECKOUT_FILE } from '@/shared/constants/checkout';
 import { formatPlanPrice } from '@/shared/lib/price';
 import { Divider } from '@/shared/ui/divider';
-import { DocumentMock } from '@/shared/ui/documentMock';
+import { DocumentPlaceholder } from '@/shared/ui/documentPlaceholder';
 import { HeaderFlowSection } from '@/widgets/headerFlowSection';
 
 import { CheckoutDisclaimer } from '../components/checkoutDisclaimer';
@@ -49,7 +49,7 @@ export const GroupB: FC = () => {
         <DownloadPanel data-testid="download-panel">
           <FileRow>
             <FileThumbnail>
-              <DocumentMock />
+              <DocumentPlaceholder />
             </FileThumbnail>
             <FileDetails>
               <FileNameRow>
