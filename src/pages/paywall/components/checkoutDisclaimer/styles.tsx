@@ -9,12 +9,11 @@ export const DisclaimerRoot = styled.p<{ $align: 'left' | 'center' }>`
   text-align: ${({ $align }) => $align};
   margin: 0;
 
-  /* Links match the surrounding secondary text; only the underline
-     sets them apart. */
+  /* Links render as plain text — same color, weight, and size as the
+     surrounding copy. */
   a {
     color: inherit;
     font-weight: inherit;
-    text-decoration: underline;
-    text-underline-offset: 2px;
+    text-decoration: none;
   }
 `;
