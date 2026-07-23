@@ -39,7 +39,7 @@ export const CheckoutDisclaimer: FC<ICheckoutDisclaimerProps> = ({
         By continuing you agree that after the end of the 7-day trial you will be automatically
         charged {recurringPrice} every 4-weeks unless you cancel before your trial ends. Cancel
         through your account, {CHECKOUT.supportEmail}, or {CHECKOUT.supportPhone}.{' '}
-        {subscriptionPolicyLink} · {refundPolicyLink}.
+        {subscriptionPolicyLink} and {refundPolicyLink}.
       </DisclaimerRoot>
     );
   }
