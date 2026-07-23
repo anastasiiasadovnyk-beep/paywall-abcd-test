@@ -44,7 +44,7 @@ export const GroupB: FC = () => {
       <HeaderFlowSection />
       <Content>
         <Title>Your download is almost complete</Title>
-        <Subtitle>It starts the moment your payment goes through.</Subtitle>
+        <Subtitle>It starts the moment your payment goes through</Subtitle>
 
         <DownloadPanel data-testid="download-panel">
           <FileRow>
