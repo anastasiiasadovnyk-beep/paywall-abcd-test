@@ -10,18 +10,15 @@ export const DisclaimerRoot = styled.p<{ $align: 'left' | 'center' }>`
   margin: 0;
 
   b {
-    color: var(--Text-text_default, #393939);
     font-weight: 700;
   }
 
+  /* Links match the surrounding secondary text; only the underline
+     sets them apart. */
   a {
-    color: var(--Text-text_default, #393939);
-    font-weight: 700;
+    color: inherit;
+    font-weight: inherit;
     text-decoration: underline;
     text-underline-offset: 2px;
-
-    &:hover {
-      color: var(--Text-text_default, #393939);
-    }
   }
 `;
