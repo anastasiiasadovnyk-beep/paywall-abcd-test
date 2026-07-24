@@ -1,4 +1,4 @@
-import type { FC } from 'react';
+import type { FC, ReactNode } from 'react';
 
 import { ReactComponent as ApplePayLogo } from '@/shared/ui/assets/payment-methods/apple-pay.svg?react';
 import { ReactComponent as GPayLogo } from '@/shared/ui/assets/payment-methods/gpay.svg?react';
@@ -14,6 +14,7 @@ import {
   CardBrandIcon,
   CardBrandsRow,
   CardButton,
+  CardButtonCell,
   CardLabel,
   PaymentButton,
   PaymentButtonsContainer,
@@ -28,6 +29,8 @@ interface IPaymentMethodsProps {
   onCardClick?: () => void;
   /** Whether the card details dropdown is open. */
   isCardExpanded?: boolean;
+  /** Dropdown content anchored to the card button (group B). */
+  cardDropdown?: ReactNode;
 }
 
 const CARD_BRANDS = [
@@ -46,6 +49,7 @@ export const PaymentMethods: FC<IPaymentMethodsProps> = ({
   layout = 'stacked',
   onCardClick,
   isCardExpanded,
+  cardDropdown,
 }) => {
   return (
     <PaymentButtonsContainer $layout={layout}>
@@ -63,19 +67,22 @@ export const PaymentMethods: FC<IPaymentMethodsProps> = ({
       >
         <ApplePayLogo />
       </PaymentButton>
-      <CardButton
-        type="button"
-        data-testid="card-button"
-        onClick={onCardClick}
-        aria-expanded={onCardClick ? isCardExpanded : undefined}
-      >
-        <CardLabel>Pay with card</CardLabel>
-        <CardBrandsRow>
-          {CARD_BRANDS.map((brand) => (
-            <CardBrandIcon key={brand.name} src={brand.logo} alt={brand.name} />
-          ))}
-        </CardBrandsRow>
-      </CardButton>
+      <CardButtonCell>
+        <CardButton
+          type="button"
+          data-testid="card-button"
+          onClick={onCardClick}
+          aria-expanded={onCardClick ? isCardExpanded : undefined}
+        >
+          <CardLabel>Pay with card</CardLabel>
+          <CardBrandsRow>
+            {CARD_BRANDS.map((brand) => (
+              <CardBrandIcon key={brand.name} src={brand.logo} alt={brand.name} />
+            ))}
+          </CardBrandsRow>
+        </CardButton>
+        {cardDropdown}
+      </CardButtonCell>
     </PaymentButtonsContainer>
   );
 };

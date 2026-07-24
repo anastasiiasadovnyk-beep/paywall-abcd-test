@@ -99,9 +99,8 @@ export const GroupB: FC = () => {
           layout="grid"
           onCardClick={() => setIsCardFormOpen((isOpen) => !isOpen)}
           isCardExpanded={isCardFormOpen}
+          cardDropdown={isCardFormOpen ? <CardPaymentForm ref={cardFormRef} /> : undefined}
         />
-
-        {isCardFormOpen && <CardPaymentForm ref={cardFormRef} />}
 
         <TrialCaption>
           <span>7-day trial for {trialPrice}</span>

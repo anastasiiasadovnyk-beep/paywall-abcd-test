@@ -2,27 +2,17 @@ import { type ChangeEvent, forwardRef, useState } from 'react';
 
 import { Input } from '@universe-forma/ui-pes';
 
-import amexLogo from '@/shared/ui/assets/card-brands/american-express-inverted.svg';
-import maestroLogo from '@/shared/ui/assets/card-brands/maestro-inverted.svg';
-import mastercardLogo from '@/shared/ui/assets/card-brands/mastercard-inverted.svg';
-import visaLogo from '@/shared/ui/assets/card-brands/visa-inverted.svg';
 import { InfoIcon } from '@/shared/ui/icons';
 
 import { ContinueButton } from '../continueButton';
-import { BrandIcon, BrandsRow, FieldsRow, FormRoot, HeaderRow, Title } from './styles';
-
-/* Full-color brand set for the white card. */
-const CARD_BRANDS = [
-  { name: 'Mastercard', logo: mastercardLogo },
-  { name: 'Maestro', logo: maestroLogo },
-  { name: 'Visa', logo: visaLogo },
-  { name: 'American Express', logo: amexLogo },
-];
+import { FieldsRow, FormRoot } from './styles';
 
 /**
- * Card details form that unfolds under the "Pay with card" button.
- * Purely presentational — the production funnel wires the fields and
- * the pay button to the payment SDK.
+ * Card details form that unfolds under the "Pay with card" button —
+ * the button itself acts as the form's title. On two-column layouts
+ * the form floats below the button like a dropdown; on single-column
+ * layouts it expands in place. Purely presentational — the production
+ * funnel wires the fields and the pay button to the payment SDK.
  */
 export const CardPaymentForm = forwardRef<HTMLDivElement>((_props, ref) => {
   const [fields, setFields] = useState({
@@ -39,15 +29,6 @@ export const CardPaymentForm = forwardRef<HTMLDivElement>((_props, ref) => {
 
   return (
     <FormRoot ref={ref} data-testid="card-payment-form">
-      <HeaderRow>
-        <Title>Pay with cards</Title>
-        <BrandsRow>
-          {CARD_BRANDS.map((brand) => (
-            <BrandIcon key={brand.name} src={brand.logo} alt={brand.name} />
-          ))}
-        </BrandsRow>
-      </HeaderRow>
-
       <Input
         size="lg"
         bg="default"
