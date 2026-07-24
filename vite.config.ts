@@ -27,7 +27,9 @@ export default defineConfig({
     tsconfigPaths(),
   ],
   server: {
-    port: 3000,
+    // The dev harness assigns a free port via PORT; 3000 is the
+    // fallback for manual runs.
+    port: Number(process.env.PORT) || 3000,
     host: true,
   },
 });

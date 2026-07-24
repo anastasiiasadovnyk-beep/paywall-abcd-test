@@ -24,6 +24,10 @@ export type TPaymentMethodsLayout = 'stacked' | 'grid';
 interface IPaymentMethodsProps {
   /** 'stacked' — one button per row (groups A, C, D); 'grid' — 2×2 (group B). */
   layout?: TPaymentMethodsLayout;
+  /** Toggles the card details dropdown (group B). */
+  onCardClick?: () => void;
+  /** Whether the card details dropdown is open. */
+  isCardExpanded?: boolean;
 }
 
 const CARD_BRANDS = [
@@ -38,7 +42,11 @@ const CARD_BRANDS = [
  * Purely presentational — the production funnel wires these to the
  * payment SDK.
  */
-export const PaymentMethods: FC<IPaymentMethodsProps> = ({ layout = 'stacked' }) => {
+export const PaymentMethods: FC<IPaymentMethodsProps> = ({
+  layout = 'stacked',
+  onCardClick,
+  isCardExpanded,
+}) => {
   return (
     <PaymentButtonsContainer $layout={layout}>
       <PaymentButton type="button" $brand="paypal" data-testid="paypal-button">
@@ -55,7 +63,12 @@ export const PaymentMethods: FC<IPaymentMethodsProps> = ({ layout = 'stacked' })
       >
         <ApplePayLogo />
       </PaymentButton>
-      <CardButton type="button" data-testid="card-button">
+      <CardButton
+        type="button"
+        data-testid="card-button"
+        onClick={onCardClick}
+        aria-expanded={onCardClick ? isCardExpanded : undefined}
+      >
         <CardLabel>Pay with card</CardLabel>
         <CardBrandsRow>
           {CARD_BRANDS.map((brand) => (
